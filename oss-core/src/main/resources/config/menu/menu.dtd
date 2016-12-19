@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="BIG5"?>
+<!ELEMENT menus (
+	menu*
+)>
+<!ELEMENT menu (
+	menu*
+)>
+<!ATTLIST menu id ID #REQUIRED>
+<!ATTLIST menu text CDATA #REQUIRED>
+<!ATTLIST menu link CDATA #IMPLIED>
+<!ATTLIST menu leaf (true | false) "true">
+<!ATTLIST menu  cls (folder | file) "folder">
+<!ATTLIST menu active (true | false) "true">

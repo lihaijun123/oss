@@ -1,0 +1,51 @@
+@CHARSET "UTF-8";
+.textareaCss{
+	height:80px;
+	width:44%;
+}
+.imgBox{
+	background:none repeat scroll 0 0 #FFFFFF;
+	border:1px solid #DFDFDF;
+	float:left;
+	margin:0 5px 5px 0;
+	padding:1px;
+	position:relative;
+	height:100px;
+	text-align:center;
+	vertical-align:middle;
+	width:100px;
+	}
+.upBox{
+	position:absolute;
+	right:4px
+}
+.class02{
+	padding: 0px 10px 0px 10px;
+	background-color: #7b7d78;
+
+}
+.class04{
+	padding: 5px 10px 5px 10px;
+	text-align:center;
+	margin: 5px 10px 5px 10px;
+}
+.class05{
+	text-align:center;
+	padding: 5px 10px 5px 10px;
+	width: 150px;
+}
+.gift10{
+	height: 35px;
+}
+.gift11{
+	padding: 10px 0px 10px 150px;	
+}
+.gift12{
+	padding: 10px 0px 10px 0px;
+	text-align: center;
+}
+
+
+
+	
+	

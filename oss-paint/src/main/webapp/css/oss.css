@@ -1,0 +1,54 @@
+html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td{margin:0;padding:0;}
+img,body,html{border:0;}
+img{ vertical-align:middle}
+body,p,a,li,td,span,dl,th{ font-size:12px; font-family:Arial, Helvetica, sans-serif}
+body {SCROLLBAR-FACE-COLOR: #CFE2FC; SCROLLBAR-HIGHLIGHT-COLOR: #fcfcfc; SCROLLBAR-3DLIGHT-COLOR: #7eabf7; SCROLLBAR-ARROW-COLOR: #2F5FAE; SCROLLBAR-TRACK-COLOR: #e3f0ff; SCROLLBAR-DARKSHADOW-COLOR: #CEE1FD; background-color:#f4f8ff; }
+th { text-align: right; padding-right: 5px; width: 250px; vertical-align: middle; }
+.requiredredstar { color: red; margin-right: 3px; font-size: 10px; font-weight: bold }
+td input, td input .text, td input .readonlytext { margin-right: 0px; background: #FFFFFF url(/images/default/form/text-bg.gif) repeat-x  scroll 0pt 0pt; padding: 0px; line-height: 18px; height: 18px; }
+.text { width:90%; }
+.text70 { width:70%; }
+.text50 { width:50%; }
+.text40 { width:40%; }
+.readonlytext { border:none; }
+.inputfile { width:85%; }
+.buttons { padding: 5px 0 0 40%; margin: auto; }
+.buttons table { float: left; margin-right: 20px }
+.errors { color: red; font-size: 11px; }
+/*.o td,.o th{background-color:#f5f5f5}*/
+.alertborder, .alertborder th, .alertborder td { background-color: #FFCBCB }
+a:LINK { color: #1d6dce; }
+a:ACTIVE { color: #1d6dce; }
+a:HOVER { color: #ff8300; }
+a:VISITED { color: #1d6dce; }
+table { background-color: #EDEDED; border: 1px solid #EDEDED; border-collapse: collapse; border-spacing: 1px; }
+textarea, .readonlytextarea { width: 90%; height: 80px; word-break: break-all; }
+.readonlytextarea { border:none; }
+table { width: 100%; border-width: 0px; }
+th { background: #f2f8ff; border-bottom: 1px solid #d4eef7; border-top: 1px solid #ffffff; padding: 3px 10px; border-right: 1px solid #ffffff; vertical-align: top; font-weight: normal; text-align: right; width: 130px; }
+.x-panel-header { border-bottom: 3px solid #bdd7f7; padding-left: 5px; padding-right: 5px; border-left: 1px solid #ffffff; border-top: 1px solid #e0edfc; vertical-align: middle; border-right: 1px solid #95bff2; background: #cee1f9 url(/images/butico.gif) repeat-x 0px -468px; }
+td { border-bottom: 1px solid #e2e2e2; border-top: 1px solid #ffffff; padding: 3px 10px; border-right: 1px solid #ffffff; background-color: #f8f8f8; vertical-align: top; }
+.buttons table td { border-bottom: 0px solid #e2e2e2; border-top: 0px solid #ffffff; padding: 0px 0px; border-right: 0px solid #ffffff; background-color: #f8f8f8; vertical-align: top; width: auto; }
+.oldSelValue { background-color: #eeeeee; }
+iframe { position: relative; }
+.submitc, .submitc:focus { font-size: 12px; height: 24px; background: transparent url(/images/fade-butt1.png) repeat scroll 0% 0%; border-color: #AAC5E3 rgb(96, 146, 202) rgb(96, 146, 202)  rgb(170, 197, 227); border-style: double; border-width: 1px; width:60px; line-height:24px; cursor:pointer; color:#376bb6; font-weight:bold }
+caption { text-align: left; }
+.x-panel-header { x-system-font: none; background: #CEE1F9 url(/images/butico.gif) repeat-x scroll 0px -468px; border-color: #E0EDFC rgb(149, 191, 242) rgb(189, 215, 247)  rgb(255, 255, 255); border-style: solid; height: 18px; vertical-align: middle; overflow: hidden; color: #15428B; border-bottom-width: 3px solid #E0EDFC; font-weight: bold; line-height: 15px; padding: 1px 1px 3px 5px; font-size: 12px; }
+#industry_td table { width: 60%; }
+.Wdate { border: #999 1px solid; height: 20px; background: #fff url(/images/datePicker.gif) no-repeat right; }
+#dir_panel table, .dir_panel table { width: auto; }
+#dir_panel table td, .dir_panel table td { padding:0px; margin:0px; border:none; }
+#dir_panel input, .dir_panel input { width:400px; }
+* { font-size: 12px; font-family: "verdana", "����"; }
+.bg-gray { background-color:#CCCCCC; }
+small { color:#999999; font-size:12px; font-weight:normal; }
+#addInfor_F th{ width:120px; text-align:right}
+.long input { width:450px; }
+/*会议信息修改页面中的参展人员修改 start*/
+.plus{background:url(/images/nolines_plus.gif) no-repeat 0 0;height:14px;_background-position:0 2px;float:none;}
+.minus{background:url(/images/nolines_minus.gif) no-repeat 0 0;height:14px;_background-position:0 2px;float:none;}
+#prodTypes{display:inline-block;*display:inline;zoom:1;background:#f5f7f8;border:1px solid #d0dcef;padding:0px 3px;margin:6px 0 0}
+#prodTypes li{padding:3px 27px 3px 8px;color:#333;margin:3px 0;position:relative;list-style:none}
+#prodTypes .cur{text-decoration:none;background:#d8e2f2}
+#prodTypes a{margin-left:3px;display:inline-block;width:15px;height:15px;cursor:pointer;position:absolute;right:5px;top:6px}
+/*会议信息修改页面中的参展人员修改 end*/

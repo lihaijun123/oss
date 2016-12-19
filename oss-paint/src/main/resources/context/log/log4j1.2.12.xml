@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="true">
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-4r [%t] %-5p  %c %d %L %x - %m%n" />
+        </layout>
+    </appender>
+	<appender name="WEBAPP" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="/home/focus3d/log/oss/webapp.log" />
+		<param name="append" value="true" />
+		<param name="MaxFileSize" value="10MB" />
+		<param name="MaxBackupIndex" value="10" />
+		<param name="ImmediateFlush" value="true"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %C %c %d - %m%n" />
+		</layout>
+	</appender>
+	<appender name="SERVER-APP" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="/home/focus3d/log/oss/server-app-base.log" />
+		<param name="append" value="true" />
+		<param name="MaxFileSize" value="10MB" />
+		<param name="MaxBackupIndex" value="10" />
+		<param name="ImmediateFlush" value="true"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %C %c %d - %m%n" />
+		</layout>
+	</appender>
+	<appender name="as_SERVER-APP" class="org.apache.log4j.AsyncAppender">
+			<param name="BufferSize" value="512"/>
+			<appender-ref ref="SERVER-APP" />
+	</appender>
+	<appender name="as_WEBAPP" class="org.apache.log4j.AsyncAppender">
+			<param name="BufferSize" value="512"/>
+			<appender-ref ref="WEBAPP" />
+	</appender>
+	<!-- ==========================================================================================================-->
+	<appender name="focus_oss" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="/home/focus3d/log/oss/oss.log" />
+		<param name="append" value="true" />
+		<param name="MaxFileSize" value="10MB" />
+		<param name="MaxBackupIndex" value="10" />
+		<param name="ImmediateFlush" value="true"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %C %c %d - %m%n" />
+		</layout>
+	</appender>
+	<appender name="focus_oss_hibernate" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="/home/focus3d/log/oss/oss_hibernate.log" />
+		<param name="append" value="true" />
+		<param name="MaxFileSize" value="10MB" />
+		<param name="MaxBackupIndex" value="10" />
+		<param name="ImmediateFlush" value="true"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %C %c %d - %m%n" />
+		</layout>
+	</appender>
+	<appender name="focus_oss_spring" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="/home/focus3d/log/oss/oss_spring.log" />
+		<param name="append" value="true" />
+		<param name="MaxFileSize" value="10MB" />
+		<param name="MaxBackupIndex" value="10" />
+		<param name="ImmediateFlush" value="true"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %C %c %d - %m%n" />
+		</layout>
+	</appender>
+	<appender name="as_focus_oss_hibernate" class="org.apache.log4j.AsyncAppender">
+			<param name="BufferSize" value="512"/>
+			<appender-ref ref="focus_oss_hibernate" />
+	</appender>
+	<appender name="as_focus_oss_spring" class="org.apache.log4j.AsyncAppender">
+			<param name="BufferSize" value="512"/>
+			<appender-ref ref="focus_oss_spring" />
+	</appender>
+	<appender name="as_focus_oss" class="org.apache.log4j.AsyncAppender">
+			<param name="BufferSize" value="512"/>
+			<appender-ref ref="focus_oss" />
+	</appender>
+
+	<!-- ==========================================================================================================-->
+	<root>
+		<level value="error" />
+		<appender-ref ref="as_SERVER-APP"/>
+	</root>
+	<logger name="SERVER_APP" additivity="true">
+		<level value="error" />
+		<appender-ref ref="as_SERVER-APP" />
+	</logger>
+	<logger name="WEB-APP" additivity="true">
+		<level value="error" />
+		<appender-ref ref="as_WEBAPP" />
+	</logger>
+	<logger name="org.hibernate" additivity="true">
+		<level value="error" />
+		<appender-ref ref="as_focus_oss_hibernate" />
+	</logger>
+	<logger name="org.springframework" additivity="true">
+		<level value="error" />
+		<appender-ref ref="as_focus_oss_spring" />
+	</logger>
+	<logger name="com.focustech.focus3d.app" additivity="true">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	<logger name="com.focustech.focus3d.cache" additivity="true">
+		<level value="error" />
+	</logger>
+	<logger name="org.apache.zookeeper" additivity="true">
+		<level value="error" />
+	</logger>
+	<logger name="com.focustech" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="CONSOLE"/>
+	</logger>
+</log4j:configuration>

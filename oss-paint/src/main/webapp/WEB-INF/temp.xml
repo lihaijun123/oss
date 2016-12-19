@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="BIG5"?>
+<!--分配方式為固定值/按平均-->
+<books>
+	<divide region="Zhejiang_Ningbo" divide-method="fix">
+		<company name="寧波海博">
+			<org_no>2210</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Zhejiang_Jinhua" divide-method="fix">
+		<company name="寧波海博">
+			<org_no>2210</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Zhejiang_Taizhou" divide-method="fix">
+		<company name="台州訊業網絡技術有限公司">
+			<org_no>2211</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+		<company name="台州海博網絡技術服務公司">
+			<org_no>2213</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+		<company name="台州銳取網絡科技有限公司">
+			<org_no>2214</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Zhejiang_Wenzhou" divide-method="fix">
+		<company name="浙江網天下科技開發有限公司">
+			<org_no>2220</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Zhejiang_Wenzhou" divide-method="fix">
+		<company name="渠道助理">
+			<org_no>2200</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Zhejiang_Hangzhou" divide-method="fix">
+		<company name="杭州泛美文化傳播有限公司">
+			<org_no>2240</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+		<company name="杭州海派網絡科技有限公司">
+			<org_no>22D0</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+		<company name="焦點直銷售部">
+			<org_no>2100</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Zhejiang_Huzhou" divide-method="fix">
+		<company name="浙江湖州齊銳網絡科技有限公司">
+			<org_no>22T0</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+		<company name="焦點直銷售部">
+			<org_no>2100</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Zhejiang_Shaoxing" divide-method="fix">
+		<company name="杭州恩雅網絡科技有限公司">
+			<org_no>22W0</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+		<company name="焦點直銷售部">
+			<org_no>2100</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Zhejiang_Jiaxing" divide-method="fix">
+		<company name="紹興市銳意軟件嘉興分公司">
+			<org_no>22h0</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+		<company name="嘉興力拓信息科技有限公司">
+			<org_no>22q0</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+		<company name="焦點直銷售部">
+			<org_no>2100</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Fujian_Xiamen" divide-method="fix">
+		<company name="廈門互易科技有限公司">
+			<org_no>2280</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+		<company name="焦點直銷售部">
+			<org_no>2100</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Fujian_Quanzhou" divide-method="fix">
+		<company name="泉州網微計算機網絡有限公司">
+			<org_no>2290</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+		<company name="焦點直銷售部">
+			<org_no>2100</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Guangxi" divide-method="fix">
+		<company name="桂林英泰商務有限公司">
+			<org_no>22F0</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+		<company name="焦點直銷售部">
+			<org_no>2100</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Jiangsu_Changzhou" divide-method="fix">
+		<company name="常州中環互聯網信息技術有限公司">
+			<org_no>22d0</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+		<company name="焦點直銷售部">
+			<org_no>2100</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Guangdong_Shenzhen" divide-method="fix">
+		<company name="深圳辦事處一組">
+			<org_no>2360</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+		<company name="深圳辦事處二組">
+			<org_no>23B0</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Guangdong_Guangzhou" divide-method="fix">
+		<company name="廣州辦事處一組">
+			<org_no>2380</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+		<company name="廣州辦事處二組">
+			<org_no>23A0</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Jiangsu_Suzhou" divide-method="fix">
+		<company name="蘇州辦事處">
+			<org_no>2330</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Guangdong_Dongguan" divide-method="fix">
+		<company name="東莞辦事處">
+			<org_no>2310</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Guangdong_Foshan" divide-method="fix">
+		<company name="佛山辦事處">
+			<org_no>2320</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Shanghai_Shanghai" divide-method="fix">
+		<company name="上海辦事處">
+			<org_no>2350</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Jiangsu_Wuxi" divide-method="fix">
+		<company name="無錫辦事處">
+			<org_no>2370</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Shandong_Qingdao" divide-method="fix">
+		<company name="青島分公司一組">
+			<org_no>2390</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+		<company name="青島分公司二組">
+			<org_no>23b0</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Guangdong_Zhongshan" divide-method="fix">
+		<company name="中山辦事處">
+			<org_no>23C0</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+	<divide region="Jiangsu_Zhangjiagang" divide-method="fix">
+		<company name="張家港分公司">
+			<org_no>23I0</org_no>
+			<devide_fix>1</devide_fix>
+			<devide_average>1</devide_average>
+		</company>
+	</divide>
+</books>

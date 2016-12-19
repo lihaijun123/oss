@@ -1,0 +1,104 @@
+<!--  -->
+<!ENTITY % Loop "(true|false|yes|no)">
+<!ENTITY % SqlType "(select|insert|update|delete|procedure)">
+<!ENTITY % SelectType "(get|check)">
+<!ENTITY % ErrMsg "CDATA">
+<!ENTITY % DataValue "CDATA">
+<!ENTITY % BeanName "CDATA">
+<!ENTITY % ConfigFileType "(systemFile|classPath)">
+<!-- 1:普通分页方式；2：rownum<?在前的分页方式（默认方式）；3：rowid的使用方式，此类方式要在sql中添加rownum rid的伪字段 -->
+<!ENTITY % pageType "(1|2|3)">
+<!-- global function config -->
+<!ELEMENT function-config (extend-config?,global-sql?,system*)>
+<!--  -->
+<!ELEMENT extend-config (config-file*)>
+
+<!ELEMENT config-file EMPTY>
+<!ATTLIST config-file  path					CDATA              		#REQUIRED>
+<!ATTLIST config-file  type					%ConfigFileType;    		#IMPLIED>
+
+<!-- system system -->
+<!ELEMENT system (global-sql?,function*)>
+<!ATTLIST system  sysId						CDATA              		#REQUIRED>
+
+<!--  -->
+<!ELEMENT global-sql (sql*)>
+
+
+
+<!-- one function -->
+<!ELEMENT function (execute-sql?,func-sql*,chart?)>
+<!ATTLIST function  id							CDATA              		#REQUIRED>
+<!-- a special java class implements com.nl.uitool.UIToolDataExecuter witch will to execute business logic -->
+<!ATTLIST function  beanName					%BeanName;         		#IMPLIED>
+<!ATTLIST function  message		  				CDATA					#IMPLIED>
+<!-- datasource name -->
+<!ATTLIST function  dsname		  				CDATA					#IMPLIED>
+<!-- whether to init fetch -->
+<!ATTLIST function  initFetch	  				%Loop;					#IMPLIED>
+<!--  -->
+<!ELEMENT execute-sql (sql*)>
+
+<!--  -->
+<!ELEMENT sql  (#PCDATA)>
+<!ATTLIST sql  id								CDATA              		#REQUIRED>
+<!-- witch special class will implement com.nl.uitool.UIToolExeSqlCreate interface -->
+<!ATTLIST sql  creator							CDATA              		#IMPLIED>
+<!--  -->
+<!ATTLIST sql  pageType							%pageType;          		#IMPLIED>
+
+<!--  -->
+<!ELEMENT func-sql (params*)>
+<!ATTLIST func-sql  id             				CDATA					#REQUIRED>
+<!ATTLIST func-sql  sqlId						CDATA					#REQUIRED>
+<!ATTLIST func-sql  loop           				%Loop;					#IMPLIED>
+<!ATTLIST func-sql  sqlType        				%SqlType;				#REQUIRED>
+<!ATTLIST func-sql  selectType     				%SelectType;			#IMPLIED>
+<!ATTLIST func-sql  argGroup     				CDATA					#IMPLIED>
+<!-- when the loop attribute is true and this property has value , then current sql loop with this -->
+<!ATTLIST func-sql  mainLoopParam  				CDATA					#IMPLIED>
+<!ATTLIST func-sql  stmtField	  				CDATA					#IMPLIED>
+<!-- defined a special class witch implement com.nl.uitool.UIToolDataExecuter -->
+<!ATTLIST func-sql  executer	  				CDATA					#IMPLIED>
+
+<!--  -->
+<!ELEMENT params (param*)>
+<!ATTLIST params	id							CDATA              		#REQUIRED>
+<!ATTLIST params	errMsg						%ErrMsg;				#IMPLIED>
+
+<!--  -->
+<!ELEMENT param EMPTY>
+<!ATTLIST param	id								CDATA              		#REQUIRED>
+<!ATTLIST param	value							%DataValue;				#IMPLIED>
+<!ATTLIST param	alias							%DataValue;				#IMPLIED>
+<!ATTLIST param	sequence						%DataValue;				#IMPLIED>
+<!ATTLIST param	defaultValue					%DataValue;				#IMPLIED>
+<!ATTLIST param	loop							%Loop;					#IMPLIED>
+
+<!-- defined chart info -->
+<!ELEMENT chart (subchart*)>
+<!ATTLIST chart	sqlId							CDATA              		#REQUIRED>
+<!ATTLIST chart	cretaor							CDATA              		#REQUIRED>
+
+<!ELEMENT subchart (ydim?,xdim?,datadim*,properties?)>
+<!ATTLIST subchart	id							CDATA              		#REQUIRED>
+
+
+<!ELEMENT xdim EMPTY>
+<!ATTLIST xdim	id								CDATA              		#REQUIRED>
+<!ATTLIST xdim	title							CDATA              		#IMPLIED>
+
+
+<!ELEMENT ydim EMPTY>
+<!ATTLIST ydim	id								CDATA              		#REQUIRED>
+<!ATTLIST ydim	title							CDATA              		#IMPLIED>
+
+<!ELEMENT datadim EMPTY>
+<!ATTLIST datadim	id							CDATA              		#REQUIRED>
+<!ATTLIST datadim	title						CDATA              		#IMPLIED>
+
+<!ELEMENT properties (property*)>
+<!ELEMENT property (property*)>
+<!ATTLIST property	id							CDATA              		#REQUIRED>
+<!ATTLIST property	value						CDATA              		#IMPLIED>
+

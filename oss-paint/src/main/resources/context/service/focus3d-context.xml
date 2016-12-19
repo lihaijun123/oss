@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	<import resource="classpath:/context/datasource/datasource_jta.xml" />
+	<import resource="classpath:/context/service/service_environment.xml" />
+	<import resource="classpath:/context/service/service_trigger.xml" />
+	<import resource="classpath:/com/focustech/cief/filemanage/conf/filemanage-client.xml" />
+	<!-- 
+	<import resource="classpath:/com/focustech/focus3d/app/conf/app-factory-client.xml" />
+	<import resource="classpath:/context/mq/activemq_config_banner.xml" />
+	<import resource="classpath:/context/mq/activemq_config_prodcase.xml" />
+	<import resource="classpath:/context/mq/activemq_config_appmenu.xml" />
+	<import resource="classpath:/context/mq/activemq_config_mxjbook.xml" />
+	 -->
+	<!--公共组件-->
+	<import resource="classpath:/context/component/component.xml" />
+	<import resource="classpath:/context/component/cfs-client.xml" />
+	<!-- 
+	<import resource="classpath:/context/notify/sms.xml" />
+	 -->
+	<!--
+	<import resource="classpath:/context/component/cxf-client.xml" />
+	-->
+	<context:component-scan base-package="com.focustech" />
+	<context:property-placeholder location="classpath:/config/resources/config.properties,classpath:/context/properties/config.properties" />
+	<bean class="com.focustech.common.utils.SpringContextUtil"/>
+	<!-- =================================================================== -->
+	<!-- ============================acegi config=========================== -->
+	<!-- =================================================================== -->
+	<!-- 自動監听 AuthenticationEvent 信息-->
+	<bean id="loggerListener"
+		class="org.acegisecurity.event.authentication.LoggerListener" />
+	<bean id="rememberMeServices"
+		class="com.focustech.oss2008.acegi.service.OssRememberMeServices">
+		<property name="userDetailsService" ref="userServiceImpl" />
+		<property name="alwaysRemember" value="true" />
+		<property name="tokenValiditySeconds" value="7200" />
+		<property name="key" value="focus_oss2008" />
+		<property name="cookieName" value="focus_oss2008" />
+		<property name="domain" value=""></property>
+		<property name="unCheckedUrl">
+			<list>
+				<value>^/toolBox\.do(.)*</value>
+				<value>^/user\.do\?method=depUsers(.)*</value>
+			</list>
+		</property>
+	</bean>
+	<!--
+		authenticationManager　通過Providers提供認證者列表,如果一個認證提供者失敗可以嘗試另外一個認證提供者,以保證獲取不同來源的身份認證，如
+		DaoAuthenticationProvider 從數據庫中讀取用戶信息驗證身份
+		AnonymousAuthenticationProvider 匿名用戶身份認證
+		RememberMeAuthenticationProvider 已存cookie中的用戶信息身份認證
+
+		其它的還有
+		AuthByAdapterProvider 使用容器的適配器驗證身份
+		CasAuthenticationProvider 根據Yale中心認證服務驗證身份, 用于實現單點登陸
+		JaasAuthenticationProvider 從JASS登陸配置中獲取用戶信息驗證身份
+		RemoteAuthenticationProvider 根據遠程服務驗證用戶身份
+		RunAsImplAuthenticationProvider 對身份已被管理器替換的用戶進行驗證
+		X509AuthenticationProvider 從X509認證中獲取用戶信息驗證身份
+		TestingAuthenticationProvider 單元測試時使用
+
+		每個認證者會對自己指定的證明信息進行認證，如DaoAuthenticationProvider僅對UsernamePasswordAuthenticationToken這個證明信息進行認證。
+	-->
+	<bean id="loginAuthenticationManager"
+		class="com.focustech.oss2008.acegi.ldap.OssLdapProviderManager">
+		<property name="providers">
+			<list>
+				<ref local="ldapAuthProvider" />
+				<ref local="daoAuthenticationProvider" />
+				<bean
+					class="org.acegisecurity.providers.rememberme.RememberMeAuthenticationProvider">
+					<property name="key" value="focus_oss2008" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="rememberMeAuthenticationManager"
+		class="org.acegisecurity.providers.ProviderManager">
+		<property name="providers">
+			<list>
+				<bean
+					class="org.acegisecurity.providers.rememberme.RememberMeAuthenticationProvider">
+					<property name="key" value="focus_oss2008" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<!--
+		daoAuthenticationProvider　提供用戶授權信息，
+		userDetailsService 定義jdbcDaoImpl從數據庫獲取用戶信息
+		userCache ehcache緩存user信息。
+		passwordEncoder 取得密碼後作加密
+	-->
+	<bean id="daoAuthenticationProvider"
+		class="org.acegisecurity.providers.dao.DaoAuthenticationProvider">
+		<property name="userDetailsService" ref="userServiceImpl" />
+		<!--<property name="userCache" ref="userCache" />-->
+		<!-- property name="passwordEncoder" ref="passwordEncoder" /-->
+	</bean>
+
+	<bean id="contextSource"
+		class="com.focustech.oss2008.acegi.ldap.AuthenticatedLdapContextSource">
+		<property name="urls">
+			<list>
+				<value>ldap://ldap1.wenbi1.com/</value>
+			</list>
+		</property>
+		<property name="userDn"
+			value="cn=ldapuser,cn=users,dc=focuschina,dc=com" />
+		<property name="password" value="mic66677777" />
+		<property name="baseEnvironmentProperties">
+			<map>
+				<entry>
+					<key>
+						<value>
+							java.naming.security.authentication
+						</value>
+					</key>
+					<value>simple</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="ldapAuthProvider"
+		class="com.focustech.oss2008.acegi.ldap.OssLdapAuthenticationProvider">
+		<constructor-arg>
+			<ref bean="ossBindAuthenticator" />
+		</constructor-arg>
+		<property name="simplePasswordList">
+			<list>
+				<value>mic66677777</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="ossBindAuthenticator"
+		class="com.focustech.oss2008.acegi.ldap.OssBindAuthenticator">
+		<property name="contextSource" ref="contextSource"></property>
+		<property name="filter" value="sAMAccountName=%u"></property>
+		<property name="searchBase"
+			value="cn=users,dc=focuschina,dc=com">
+		</property>
+		<property name="timeout" value="100000"></property>
+		<property name="ldapEffectiveDay" value="90"></property>
+		<property name="ldapRemainDay" value="3"></property>
+	</bean>
+
+	<!--
+		　　　passwordEncoder　使用Md5算法加密
+		為兼容現有數據暫不用MD5加密
+	-->
+	<!--
+		<bean id="passwordEncoder"
+		class="org.acegisecurity.providers.encoding.Md5PasswordEncoder" />
+	-->
+
+	<bean id="filterChainProxy"
+		class="org.acegisecurity.util.FilterChainProxy">
+		<property name="filterInvocationDefinitionSource">
+			<value>
+				CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON
+				PATTERN_TYPE_APACHE_ANT
+				/**=httpSessionContextIntegrationFilter,logoutFilter,exceptionTranslationFilter,rememberMeProcessingFilter,authenticationProcessingFilter,filterInvocationInterceptor
+			</value>
+		</property>
+	</bean>
+	<!--
+		httpSessionContextIntegrationFilter　每次request前 HttpSessionContextIntegrationFilter從Session中獲取Authentication對象，在request完後
+		又把Authentication對象保存到Session中供下次request使用,此filter必須其他Acegi filter前使用
+	-->
+	<bean id="httpSessionContextIntegrationFilter"
+		class="com.focustech.oss2008.acegi.filter.OssHttpSessionContextIntegrationFilter">
+	</bean>
+	<!--
+		logoutFilter負責退出登陸並且保存remember-me cookie
+	-->
+	<bean id="logoutFilter"
+		class="org.acegisecurity.ui.logout.LogoutFilter">
+		<constructor-arg value="/logon.do" />
+		<!-- URL redirected to after logout -->
+		<constructor-arg>
+			<list>
+				<ref bean="rememberMeServices" />
+				<bean
+					class="org.acegisecurity.ui.logout.SecurityContextLogoutHandler" />
+			</list>
+		</constructor-arg>
+		<property name="filterProcessesUrl">
+			<value>/logout.do</value>
+		</property>
+	</bean>
+	<!--
+		　rememberMeProcessingFilter　會當SecurityContextHolder中不存在Authentication.用戶授權信息，
+		rememberMeProcessingFilter就會調用autoLogin()方法從cookie中獲取用戶信息,在驗證filter之前使用
+	-->
+	<bean id="rememberMeProcessingFilter"
+		class="org.acegisecurity.ui.rememberme.RememberMeProcessingFilter">
+		<property name="authenticationManager"
+			ref="rememberMeAuthenticationManager" />
+		<property name="rememberMeServices" ref="rememberMeServices" />
+	</bean>
+	<!--
+		authenticationProcessingFilter　和servlet spec差不多,處理登陸請求
+		authenticationFailureUrl定義登陸失敗時轉向的頁面
+		defaultTargetUrl定義登陸成功時轉向的頁面
+		filterProcessesUrl定義登陸請求的頁面
+		rememberMeServices用于在驗證成功後添加cookie信息
+	-->
+	<bean id="authenticationProcessingFilter"
+		class="com.focustech.oss2008.acegi.filter.OssAuthenticationProcessingFilter">
+		<property name="authenticationManager"
+			ref="loginAuthenticationManager" />
+		<property name="alwaysUseDefaultTargetUrl" value="true" />
+		<property name="filterProcessesUrl" value="/login.do" />
+		<property name="defaultTargetUrl" value="/workspace.do" />
+		<property name="authenticationFailureUrl"
+			value="/login_error.do" />
+		<property name="rememberMeServices" ref="rememberMeServices" />
+	</bean>
+	<bean id="exceptionTranslationFilter"
+		class="com.focustech.oss2008.acegi.filter.OssExceptionTranslationFilter">
+		<property name="errorPage" value="/error.do" />
+		<property name="authenticationEntryPoint">
+			<bean
+				class="com.focustech.oss2008.acegi.provider.OssAuthenticationProcessingFilterEntryPoint">
+				<property name="loginFormUrl" value="/login_error.do" />
+				<property name="rememberMeServices"
+					ref="rememberMeServices" />
+			</bean>
+		</property>
+		<property name="accessDeniedHandler">
+			<bean
+				class="com.focustech.oss2008.acegi.handler.OssAccessDeniedHandlerImpl">
+				<property name="errorPage" value="/error.do" />
+			</bean>
+		</property>
+	</bean>
+	<!--
+		filterInvocationInterceptor在執行轉向url前檢查objectDefinitionSource中設定的用戶權限信息
+		過程︰
+		首先，objectDefinitionSource中定義了訪問URL需要的屬性信息(這里的屬性信息僅僅是標志，告訴accessDecisionManager要用哪些voter來投票)
+		然後，authenticationManager掉用自己的provider來對用戶的認證信息進行校驗。
+		最後，有投票者根據用戶持有認證和訪問url需要的屬性，調用自己的voter來投票，決定是否允許訪問。
+	-->
+	<bean id="filterInvocationInterceptor"
+		class="org.acegisecurity.intercept.web.FilterSecurityInterceptor">
+		<property name="authenticationManager"
+			ref="loginAuthenticationManager" />
+		<property name="accessDecisionManager">
+			<bean
+				class="com.focustech.oss2008.acegi.vote.UnDenyBased">
+				<property name="allowIfAllAbstainDecisions"
+					value="false" />
+				<property name="decisionVoters">
+					<list>
+						<bean
+							class="org.acegisecurity.vote.AuthenticatedVoter" />
+						<bean
+							class="com.focustech.oss2008.acegi.vote.RoleVoter">
+							<property name="rolePrefix" value=""></property>
+						</bean>
+						<bean
+							class="com.focustech.oss2008.acegi.vote.ScopeVoter">
+							<property name="noCheckUrlPerl5Pattern">
+								<list>
+									<value>^/uitoolList.ui(.)*</value>
+								</list>
+							</property>
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+		<property name="objectDefinitionSource"
+			ref="filterDefinitionSource" />
+	</bean>
+	<!-- =================================================================== -->
+	<!-- =========================Springside Extends=========================-->
+	<!-- =================================================================== -->
+	<!--
+		從cache中獲取Url資源信息 useAntPath設為false,可以匹配連接後帶參數.即全匹配，否則只能匹配到xx.do後參數無法匹配.
+	-->
+	<bean id="filterDefinitionSource"
+		class="org.springside.components.acegi.intercept.web.CacheBaseUrlDefinitionSource">
+		<property name="convertUrlToLowercaseBeforeComparison"
+			value="false" />
+		<property name="useAntPath" value="false" />
+		<property name="acegiCacheManager" ref="acegiCacheManager" />
+		<property name="unCheckedUrl">
+			<list>
+				<value>^/logon.do(.)*</value>
+				<value>^/logout.do(.)*</value>
+				<value>^/error.do(.)*</value>
+				<value>^/login_error.do(.)*</value>
+			</list>
+		</property>
+		<!-- 默認保護所有資源 -->
+	</bean>
+	<bean id="acegiCacheManager"
+		class="org.springside.components.acegi.cache.AcegiCacheManagerFactoryBean">
+		<!-- <property name="userCache" ref="userCache" /> -->
+		<property name="resourceCache" ref="resourceCache" />
+		<property name="authenticationService"
+			ref="authenticationService" />
+		<property name="cloneResourceCache" ref="resourceCacheCopy"></property>
+	</bean>
+	<bean id="resourceCache"
+		class="org.springside.components.acegi.cache.EhCacheBasedResourceCache"
+		autowire="byName">
+		<property name="cache" ref="resourceEhCache"></property>
+	</bean>
+	<bean id="resourceCacheCopy"
+		class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager" ref="ehCacheManager" />
+		<property name="cacheName" value="resourceCacheCopy" />
+	</bean>
+	<bean id="resourceEhCache"
+		class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager" ref="ehCacheManager" />
+		<property name="cacheName" value="resourceCache" />
+	</bean>
+	<bean id="authenticationService"
+		class="org.springside.components.acegi.service.DaoAuthenticationService">
+		<property name="dataSource" ref="ossDataSource" />
+		<property name="loadResourcesQuery">
+			<value>
+				select RESOURCE_INTERFACE,RESOURCE_TYPE from
+				OSS_ADMIN_RESOURCE where RESOURCE_TYPE = '2' and ACTIVE = '1'
+				order by RESOURCE_ID
+			</value>
+		</property>
+		<property name="authoritiesByResourceQuery">
+			<value>
+				select r.ROLE_NAME,rc.DATA_SCOPE_FORMULA,1 from
+				OSS_ADMIN_RESOURCE c,OSS_ADMIN_ROLE
+				r,OSS_ADMIN_ROLE_RESOURCE rc where c.RESOURCE_ID =
+				rc.RESOURCE_ID and r.ROLE_ID = rc.ROLE_ID and
+				c.RESOURCE_TYPE = '2' and c.RESOURCE_INTERFACE = ?
+				and c.ACTIVE = '1' and r.ACTIVE = '1'
+				union
+				select rc.USER_ID,'',2 from OSS_ADMIN_RESOURCE
+				c,OSS_ADMIN_USER_RESOURCE rc where c.RESOURCE_ID =
+				rc.RESOURCE_ID and c.RESOURCE_TYPE = '2' and
+				c.RESOURCE_INTERFACE = ? and c.ACTIVE = '1'
+			</value>
+		</property>
+		<property name="rolePropertyName" value="authority"></property>
+		<property name="scopePropertyName" value="scope"></property>
+		<property name="attributeTypePropertyName"
+			value="attributeType">
+		</property>
+	</bean>
+	<!-- =================================================================== -->
+	<!-- ==========================business services======================== -->
+	<!-- =================================================================== -->
+	<!-- 參數緩存 -->
+	<bean id="parameterCache"
+		class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager">
+			<ref local="ehCacheManager" />
+		</property>
+		<property name="cacheName">
+			<value>parameterCache</value>
+		</property>
+	</bean>
+	<bean id="parameterCacheInterceptor"
+		class="com.focustech.oss2008.service.impl.ParameterCacheInterceptor">
+		<property name="cache">
+			<ref local="parameterCache" />
+		</property>
+	</bean>
+
+	<!-- 鏈接範圍緩存 -->
+	<bean id="urlScopeCache"
+		class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager">
+			<ref local="ehCacheManager" />
+		</property>
+		<property name="cacheName">
+			<value>urlScopeCache</value>
+		</property>
+	</bean>
+	<bean id="urlAuthorityAspect"
+		class="com.focustech.oss2008.service.aspect.UrlAuthorityAspect">
+		<property name="cache">
+			<ref local="urlScopeCache" />
+		</property>
+		<property name="order" value="3"></property>
+	</bean>
+	<!-- 角色模塊緩存 -->
+	<bean id="roleModelCache"
+		class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager">
+			<ref local="ehCacheManager" />
+		</property>
+		<property name="cacheName">
+			<value>roleModelCache</value>
+		</property>
+	</bean>
+	<bean id="roleModelAspect"
+		class="com.focustech.oss2008.service.aspect.RoleModelAspect">
+		<property name="cache">
+			<ref local="roleModelCache" />
+		</property>
+		<property name="order" value="2"></property>
+	</bean>
+	<!-- 登陸用戶緩存 -->
+	<bean id="loginUserCache"
+		class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager">
+			<ref local="ehCacheManager" />
+		</property>
+		<property name="cacheName">
+			<value>loginUserCache</value>
+		</property>
+	</bean>
+	<bean id="LoginUserAspect"
+		class="com.focustech.oss2008.service.aspect.LoginUserAspect">
+		<property name="cache">
+			<ref local="loginUserCache" />
+		</property>
+		<property name="order" value="2"></property>
+	</bean>
+	<!-- 日志攔截 -->
+	<bean id="logInterceptor"
+		class="com.focustech.oss2008.service.impl.LogInterceptor">
+		<property name="valve" value="8000" />
+		<property name="enterLogEnabled" value="true" />
+		<property name="exitLogEnabled" value="true" />
+	</bean>
+	<!-- 初始化讀入驗證、異常資源文件-->
+	<bean id="messageUtils"
+		class="com.focustech.common.utils.MessageUtils" init-method="init">
+
+		<property name="validateResource" value="classpath:/config/resources/validate.properties">
+        </property>
+        <property name="exceptionResource" value="classpath:/config/resources/exception.properties">
+        </property>
+        <property name="fieldResource" value="classpath:/config/resources/field.properties">
+        </property>
+        <property name="infoResource" value="classpath:/config/resources/info.properties">
+        </property>
+	</bean>
+
+	<aop:aspectj-autoproxy />
+	<aop:config>
+		<aop:advisor
+			pointcut="execution(* com.focustech.oss2008.service.impl.OssAdminParameterServiceImpl.listParameters(..))"
+			advice-ref="parameterCacheInterceptor" order="3" />
+		<!--<aop:advisor
+			pointcut="execution(* com.focustech.oss2008.service.impl.ToolBoxServiceImpl.Category(..))"
+			advice-ref="sortCacheInterceptor" order="3" />-->
+		<aop:advisor
+			pointcut="execution(* com.focustech.oss2008..*.*(..)) "
+			advice-ref="logInterceptor" order="1" />
+	</aop:config>
+
+	<!-- 導入其它配置 -->
+	<bean id="ehCacheManager"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation">
+			<value>classpath:config/ehcache.xml</value>
+		</property>
+	</bean>
+	<!-- -->
+	<bean id="dBRecordAspect" class="com.focustech.extend.spring.aspect.DBRecordAspect"/>
+</beans>

@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=BIG5" />
+        <title>焦點科技業務支持系統--登陸</title>
+        <style type="text/css">
+            body {
+                font-size: 12px;
+                color: #000000;
+                font-family: "verdana", "宋體";
+            }
+            
+            #c {
+                position: absolute;
+                bottom: 0;
+                background: #505050;
+                border-top: 1px solid #fff;
+                color: #FFFFFF;
+                width: 100%;
+                text-align: center;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                margin: 0px;
+                padding-right: 0px;
+                padding-left: 0px;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 12px;
+            }
+        </style>
+        <script>
+            function doCheck(userId) {
+                document.getElementById("user").value = userId;
+                document.getElementById("form").submit();
+            }
+        </script>
+    </head>
+    <body>
+        <form id="form" name="f" action="/login.do" method="post" target="_blank">
+            <input type="hidden" id="user" tabindex="0" name="j_username" value=""/>
+            <input type="hidden" id="pass" name="j_password" value="123456a"/>
+            <input type="hidden" id="vNum" name="validateNumber" value="test"/>
+        </form>
+        <table style="border:1px solid #eee;">
+            <tr>
+                <td>
+                    <input type="button" value="銷售區域經理" onclick="doCheck('interge')"/>
+                </td>
+                <td>                     
+                    <input type="button" value="銷售區域主任" onclick="doCheck('1515')"/>
+                </td>
+                <td>
+                    <input type="button" value="銷售業務專員" onclick="doCheck('ting')"/>
+                </td>
+                <td>
+                    <input type="button" value="銷售業務助理" onclick="doCheck('stacey214')"/>
+                </td>
+                <td>
+                    <input type="button" value="銷售專項主任" onclick="doCheck('andy5258')"/>
+                </td>
+                <td>
+                    <input type="button" value="銷售承攬" onclick="doCheck('hsueh')"/>
+                </td>
+                <td>
+                    <input type="button" value="總部銷售業務助理" onclick="doCheck('ghost')"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" value="總部審核助理" onclick="doCheck('zo')"/>
+                </td>
+                <td>
+                    <input type="button" value="訂單專員" onclick="doCheck('liucy')"/>
+                </td>
+                <td>
+                    <input type="button" value="財務主辦會計" onclick="doCheck('ying')"/>
+                </td>
+                 <td>
+                    <input type="button" value="客戶專員" onclick="doCheck('kumo')"/>
+                </td>
+                  <td>
+                    <input type="button" value="網絡編輯" onclick="doCheck('flowerlin')"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" value="系統管理員" onclick="doCheck('pengdong')"/>
+                </td>
+                <td>
+                    <input type="button" value="admin" onclick="doCheck('admin')"/>
+                </td>
+            </tr>
+        </table>
+        <div id="c">
+            Copyright &copy; 2008 焦點科技. 版權所有</div>
+        </div>
+    </body>
+</html>

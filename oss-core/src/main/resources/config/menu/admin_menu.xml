@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE menus PUBLIC "" "menu.dtd">
+<menus>
+	<menu text="car" id="a0001" leaf="false" cls="folder">
+		<menu text="a" id="b0001" link="/user.do?method=add" active = "true" leaf="true" cls="file"></menu>
+		<menu text="as" id="b0002" link="http://localhost/json-grid.jsp" active = "true" leaf="true" cls="file"></menu>
+	</menu>
+	
+	<menu text="ds" id="a0002" leaf="false" cls="folder">
+		<menu text="ew" id="b0003" link="/benz.jsp" active = "true" leaf="true" cls="file"></menu>
+		<menu text="tgftr" id="b00042" link="/baoma" active = "true" leaf="true" cls="file"></menu>
+	</menu>
+</menus>

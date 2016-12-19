@@ -1,0 +1,169 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+   <parent>
+	<groupId>com.focustech.focus3d</groupId>
+	<artifactId>oss</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <groupId>com.focustech.focus3d</groupId>
+  <artifactId>oss-paint</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <name>oss-paint</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.focustech.focus3d</groupId>
+      <artifactId>oss-core</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+
+   
+    <dependency>
+    	<groupId>com.focustech.cief</groupId>
+  		<artifactId>cief-remoting-netty</artifactId>
+  		<version>0.0.1</version>
+  		<exclusions>
+  			<exclusion>
+				 <groupId>org.slf4j</groupId>
+      			 <artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+  		</exclusions>
+   </dependency>
+	<dependency>
+		<groupId>com.focustech.focus3d.bundle.common</groupId>
+		<artifactId>focus3d-bundle-common-appclient</artifactId>
+		<version>0.0.10</version>
+		<exclusions>
+  			<exclusion>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+			</exclusion>
+			<exclusion>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+			</exclusion>
+			<exclusion>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-tx</artifactId>
+			</exclusion>
+			<exclusion>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+			</exclusion>
+			<exclusion>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-asm</artifactId>
+			</exclusion>
+			<exclusion>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+			</exclusion>
+			<exclusion>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+			</exclusion>
+			<exclusion>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aspects</artifactId>
+			</exclusion>
+			<exclusion>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-expression</artifactId>
+			</exclusion>
+			<exclusion>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-instrument</artifactId>
+			</exclusion>
+			<exclusion>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+			</exclusion>
+			<exclusion>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+			</exclusion>
+			<exclusion>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+			</exclusion>
+		</exclusions>
+	</dependency>
+
+	<dependency>
+		<groupId>org.apache.activemq</groupId>
+		<artifactId>activemq-all</artifactId>
+		<version>5.9.0</version>
+	</dependency>
+
+	<dependency>
+		  <groupId>net.coobird</groupId>
+		  <artifactId>thumbnailator</artifactId>
+		  <version>0.4.8</version>
+		</dependency>
+
+		<dependency>
+ 		 	<groupId>com.focustech.focus3d.bundle.sms.client</groupId>
+  			<artifactId>focus3d-sms-client</artifactId>
+  			<version>0.0.2</version>
+  			<exclusions>
+  				<exclusion>
+				 	<groupId>org.slf4j</groupId>
+      			 	<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+  			</exclusions>
+		</dependency>
+  </dependencies>
+ 	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<configuration>
+					<warSourceExcludes>WEB-INF/lib/*.jar</warSourceExcludes>
+                </configuration>
+			</plugin>
+		</plugins>
+	</build>
+	 <repositories>
+		<repository>
+			<id>Nexus</id>
+			<name>Nexus Public Mirror</name>
+			<url>http://maven.mic.com/nexus/content/groups/public/
+			</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>ins</id>
+			<name>Human Readable Name for this Mirror.</name>
+			<url>http://maven.mic.com/nexus/content/repositories/focus3d-snapshots/
+			</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<distributionManagement>
+		<repository>
+			<id>release</id>
+			<name>Nexus Release Repository</name>
+			<url> http://maven.mic.com/nexus/content/repositories/focus3d-releases/
+			</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>Internal Snapshots</name>
+			<url>http://maven.mic.com/nexus/content/repositories/focus3d-snapshots/
+			</url>
+		</snapshotRepository>
+	</distributionManagement>
+</project>

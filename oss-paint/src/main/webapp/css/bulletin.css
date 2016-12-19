@@ -1,0 +1,40 @@
+.bulletin_css {
+	background-color: #EFFFFF;
+	border: 1px solid #111111;
+	position: absolute;
+	height: 80%;
+	width: 80%;
+	top: 10%;
+	left: 10%;
+	overflow-x: auto;
+	overflow-y: auto;
+	word-break: break-all;
+}
+.curDate{
+	text-shadow: blue;
+	}
+#bulletin_table {
+	width: 100%;
+	font-size: 12px;
+	color: #000000;
+	font-family: "verdana", "ß∫≈È";
+	margin: 0px;
+	SCROLLBAR-FACE-COLOR: #CFE2FC;
+	SCROLLBAR-HIGHLIGHT-COLOR: #fcfcfc;
+	SCROLLBAR-3DLIGHT-COLOR: #7eabf7;
+	SCROLLBAR-ARROW-COLOR: #2F5FAE;
+	SCROLLBAR-TRACK-COLOR: #e3f0ff;
+	SCROLLBAR-DARKSHADOW-COLOR: #CEE1FD;
+	font-size: 12px;
+}
+
+#bulletin_table th {
+	width: 6%;
+	text-align: right;
+	vertical-align: middle;
+}
+#bulletin_table td {
+	width: 94%;
+	text-align: left;
+	vertical-align: middle;
+}

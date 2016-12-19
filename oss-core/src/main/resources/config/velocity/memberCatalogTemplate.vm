@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+<style type="text/css">
+body {
+    font-family: SimSun;
+    font-size:20px;
+    font-style:italic;
+    font-weight:bold;
+}
+table{ background:#ccc; border:1px solid #ccc}
+th{background-position:0 -50px; background-repeat:repeat-x; background-color:#e6e6e6; padding:7px; color:#666; font-weight:normal; color:#333; white-space:nowrap; word-wrap:keep-all}
+td{ background:#fff; padding:7px; line-height:10px; vertical-align:top}
+
+</style>
+</head>
+
+<body>
+<center>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+	<p>江苏工业数字虚拟展览馆</p>
+	<p>$exhibitionName 展会参展商名录</p>
+	<p>开展时间：$exhibitionTime</p>
+	<p>参展商数量：$number</p>
+	<p>网址：www.cief.com</p>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+	<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+  <table style="width=100%;font-size:10px;">
+  	<col style="width:30px"/>
+	<col style="width:100px;"/>
+	<col style="width:100px;"/>
+	<col style="width:150px;"/>
+	<col style="width:150px"/>
+	<col style="width:100px"/>
+	<col style="width:100px"/>
+    <tr style="font-size:12px">
+      <th>序号</th>
+      <th>参展商</th>
+      <th>所属地区</th>
+      <th>主营产品</th>
+      <th>展位号</th>
+      <th>展馆</th>
+      <th>电话</th>
+    </tr>
+    #foreach($exhibitor in $list)
+	    <tr>
+	      <td>$velocityCount</td>
+	      <td>$!exhibitor.companyName</td>
+	      <td>$!exhibitor.address</td>
+	      <td>$!exhibitor.mainProduct</td>
+	      <td>$!exhibitor.boothId</td>
+	      <td>$!exhibitor.exbHallName</td>
+	      <td>$!exhibitor.phone</td>
+	    </tr>
+    #end
+  </table>
+</center>
+</body>
+</html>

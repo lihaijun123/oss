@@ -1,0 +1,40 @@
+<html>
+<head>
+<script>
+function getEle(name) {
+	return document.getElementById(name);
+}
+function doPrint() {
+	var contractType = getEle("contractType_1").checked?1:2;
+	var tplType = getEle("contractType_1").checked?1:2;
+	var printCount = getEle("printCount").value;
+	var contractId = getEle("contractId").value;
+	var port = window.location.port;
+	port = port==""?"":":"+port;
+	alert("http://"+window.location.hostname + port +"/");
+	var ret = printObj.printC("http://localhost/", contractType, tplType, contractId, printCount,"","");
+	alert(ret);
+}
+</script>	
+</head>
+<body>
+<applet id="printObj" code="CPC.class" archive="3.50b52_jpedal_gpl.jar,cpc.jar" width="0px" height="0px" style="display:none">
+</applet>
+ゴ摸<input type="radio" value="1" id="contractType_1" name="contractType" checked>フ<input type="radio" id="contractType_2" value="2" name="contractType">筿<br/>
+家狾<input type="radio" value="1" id="tplType_1" name="tplType" checked>綪<input type="radio" id="tplType_2" value="2" name="tplType">快ㄆ矪<br/>
+ゴ计<input type="text" value="" name="printCount" id="printCount"><br/>
+筿ID<input type="text" value="" name="contractId" id="contractId">
+<input type="button" value="print" onclick="doPrint()">
+<form method="post" action="/printServer.do?method=ContractPrint">
+<input type="hidden" name="printCount" value="1" />
+<input type="hidden" name="contractType" value="1" />
+<input type="hidden" name="tplType" value="1" />
+<input type="hidden" name="contractId" value="" />
+
+<input type="hidden" name="bankNo" value="320006621010141041764" />
+<input type="hidden" name="bankName" value="ユ硄蝗︽玭ㄊだ︽躬加や︽" />
+<input type="submit" name="bankName" value="submit" />
+
+</form>
+</body>
+</html>

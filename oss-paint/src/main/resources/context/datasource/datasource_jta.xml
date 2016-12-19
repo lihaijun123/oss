@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	<context:component-scan base-package="com.focustech.oss2008" />
+	<!-- =================================================================== -->
+	<!-- ===================JNDI DataSource for JEE environments============ -->
+	<!-- =================================================================== -->
+	<jee:jndi-lookup id="ossDataSource"
+		jndi-name="java:comp/env/jdbc/OssDatabase" />
+	<!-- hibernate SessionFactory config -->
+	<bean name="ossSessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="ossDataSource"></property>
+		<property name="configLocation"
+			value="classpath:config/oss_hibernate_config.xml">
+		</property>
+		<property name="namingStrategy" ref="namingStrategy" />
+	</bean>
+	<bean id="namingStrategy" class="org.hibernate.cfg.ImprovedNamingStrategy" />
+	<!-- =================================================================== -->
+	<!-- ===================transaction aop config========================== -->
+	<!-- =================================================================== -->
+
+	<bean id="jtaTransactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+			<property name="sessionFactory" ref="ossSessionFactory"></property>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="jtaTransactionManager" />
+	<aop:config>
+		<aop:pointcut id="defaultServiceOperation"
+			expression="execution(* com.focustech.oss2008.service.impl.*ServiceImpl.*(..))" />
+		<aop:pointcut id="defaultServiceOperationVe"
+			expression="execution(* com.focustech.focus3d.service..impl.*ServiceImpl.*(..))" />
+		<aop:advisor pointcut-ref="defaultServiceOperation"
+			advice-ref="defaultTxAdvice" order="10" />
+		<aop:advisor pointcut-ref="defaultServiceOperationVe"
+			advice-ref="defaultTxAdvice" order="10" />
+	</aop:config>
+	<tx:advice id="defaultTxAdvice"
+		transaction-manager="jtaTransactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="false" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="list*" read-only="true" />
+			<tx:method name="load*" read-only="true" />
+			<tx:method name="select*" read-only="false" />
+			<tx:method name="*"
+				rollback-for="com.focustech.oss2008.exception.service.OssRollbackCheckedException"
+				timeout="-1" />
+		</tx:attributes>
+	</tx:advice>
+	<!-- =================================================================== -->
+	<!-- ==========================ehcache config=========================== -->
+	<!-- =================================================================== -->
+	<bean id="ehCacheManager"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation">
+			<value>classpath:config/ehcache.xml</value>
+		</property>
+	</bean>
+</beans>

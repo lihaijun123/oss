@@ -1,0 +1,19 @@
+#id_td_0_0 {
+	width:20px;
+}
+.lisTdRESOURCE_NAME {
+	text-align: left;
+	white-space: nowrap;
+}
+#id_td_RESOURCE_ID {
+	width:20px;
+}
+#id_td_RESOURCE_INTERFACE {
+	width:auto;
+}
+.lisTdRESOURCE_INTERFACE{
+	text-align: left;
+}
+#id_td_DATA_SCOPE {
+	width:200px;
+}

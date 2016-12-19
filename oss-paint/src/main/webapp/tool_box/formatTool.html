@@ -1,0 +1,160 @@
+<html>
+    <head>
+    <title>審核格式化工具</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=BIG5">
+    <link rel="stylesheet" type="text/css" href="/css/oss.css" />
+    <script type="text/javascript" src="/js/order/ttnet_tools.js"></script>
+    <script language="javascript">
+      /**
+       * 默認為英文版，初始化按鈕
+       */
+        function init() {
+            document.getElementById("en").style.display = "";
+            document.getElementById("ch").style.display = "none";
+        }
+        /**
+         * 根據版本顯示按鈕選項
+         * @param {Object} event
+         */
+        function dispaly(event) {
+            var event = event ? event : window.event;
+            var e = event.srcElement ? event.srcElement : event.target;
+            if (e.value == '1') {
+                document.getElementById("en").style.display = "none";
+                document.getElementById("ch").style.display = "";
+            }
+            else {
+                document.getElementById("en").style.display = "";
+                document.getElementById("ch").style.display = "none";
+            }
+        }
+        function toHtmlDispaly(strValue)
+        {
+          strValue=strValue.replace(/\n/g,"<br>");
+          strValue=strValue.replace(/  /g," &nbsp;");
+          return strValue;
+        }
+        /**
+         * 根據按鈕事件進行相應的格式化
+         * @param {Object} event
+         */
+        function change(event) {
+            var event = event ? event : window.event;
+            var e = event.srcElement ? event.srcElement : event.target;
+            var str = formatText(e.value,document.getElementById("old"));  
+            document.getElementById("old").value = str;
+            document.getElementById("view_effect").innerHTML= toHtmlDispaly(str);
+        }
+        /**
+         *  格式化處理
+         * @param {Object} value
+         * @param {Object} obj
+         */
+        function formatText(value,obj) {
+            switch (value) {
+                case '句首字母大寫':
+                    return toUpperFirstWordEachSentence(obj.value);
+                    break;
+                case '單詞首字母大寫':
+                    return toUpperEachWordForObject(obj);
+                    break;
+                case '字母全小寫':
+                    return toLowerForAllWord(obj.value);
+                    break;
+                case '字母全大寫':
+                    return toUpperAllWord(obj.value);
+                    break;
+                case '全角轉半角':
+                    return replacePuncFromCnToEnForObject(obj);
+                    break;
+                case '英文標點空格':
+                    return addPuncAfterBlank(obj.value);
+                    break;
+                case '半角轉全角':
+                    return doPuncEnToCnForObject(obj);
+                    break;
+                case '刪除空格':
+                    return deleteSpace(obj);
+                    break;
+                case '段首空兩格':
+                    return twoBlankEachParagraph(obj.value);
+                    break;
+                case '段間空一行':
+                    return oneBlankEachParagraph(obj.value);
+                    break;
+                case '刪除段間空行':
+                    return removeSectSpace(obj.value); 
+                    break;
+                default:
+                    return "";
+            }
+            
+        }
+    </script>
+     <style type="text/css">
+       <!--
+       textarea{
+          width: 70%;
+          height: 300px;
+          word-break: break-all;
+        }
+        -->
+    </style>
+    </head>
+    <body onload="init();">
+        <form name="formatTool" onsubmit="doClose()">
+            <table border="0" cellpadding="0" cellspacing="0" align="center" bgcolor="#EEEEEE">
+                <tr>
+                    <th>
+                         <span class="requiredredstar">*</span>審核信息版本:
+                    </th>
+                    <td colspan="3">
+                        <input type="radio" checked="checked" id="siteCode" name="siteCode" value="0" onclick="dispaly(event);"/>英文版
+                        <input type="radio" id="siteCode" name="siteCode" value="1" onclick="dispaly(event);">中文版
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        審核信息內容:
+                    </th>
+                    <td colspan="3">
+                        <textarea  id="old" name="old" rows="10" cols="80">
+                        </textarea>
+                    </td>
+                </tr>
+                <tr>
+                  <th></th>
+                    <td id="en" colspan="3">
+                        <input type="button"  value="句首字母大寫" onClick="change(event);" class="submitc"/>
+                        <input type="button"  value="單詞首字母大寫" onClick="change(event);" class="submitc"/>
+                        <input type="button"  value="字母全小寫" onClick="change(event);" class="submitc"/>
+                        <input type="button"  value="字母全大寫" onClick="change(event);" class="submitc"/>
+                     <p><input type="button"  value="全角轉半角" onClick="change(event);" class="submitc"/>
+                        <input type="button"  value="英文標點空格" onClick="change(event);" class="submitc"/>
+                        <input type="button"  value="段間空一行" onClick="change(event);" class="submitc"/>
+                        <input type="button"  value="刪除段間空行" onClick="change(event)" class="submitc"/>
+                        </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th></th>
+                    <td id="ch" colspan="3">
+                        <input type="button"  value="半角轉全角" onClick="change(event);" class="submitc"/>
+                        <input type="button"  value="刪除空格" onClick="change(event)" class="submitc"/>
+                        <input type="button"  value="段首空兩格" onClick="change(event)" class="submitc"/>
+                     <p><input type="button"  value="段間空一行" onClick="change(event);" class="submitc"/>
+                        <input type="button"  value="刪除段間空行" onClick="change(event)" class="submitc"/>
+                        </p>
+                    </td>
+                    </tr>
+                <tr>
+                    <th>
+                        預覽:
+                    </th>
+                    <td id="view_effect" align="left" colspan="3">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

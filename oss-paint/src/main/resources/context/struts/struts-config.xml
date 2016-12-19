@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	<form-beans>
+		<!-- uitool form start -->
+		<form-bean name="uitoolListForm" type="com.focustech.uitool.list.form.UIToolListCtrlForm" />
+		<form-bean name="uitoolOperForm" type="com.focustech.uitool.list.form.UIToolOperCtrlForm" />
+		<form-bean name="uitoolChartForm" type="com.focustech.uitool.list.form.UIToolChartCtrlForm" />
+		<form-bean name="refreshFrom" type="com.focustech.uitool.list.form.UIToolRefreshForm" />
+		<!-- uitool form end -->
+	</form-beans>
+	<global-forwards>
+		<forward name="appIndex" path="/index.jsp" />
+		<forward name="errorPage" path="/WEB-INF/uitool/errorPage.jsp" />
+	</global-forwards>
+	<action-mappings>
+		<!-- uitool ctrl config -->
+		<action path="/uitoolList" type="com.focustech.uitool.list.action.UIToolListCtrlAction" name="uitoolListForm"
+			scope="request">
+			<forward name="list" path="/WEB-INF/uitool/list/lisCtrl.jsp" module="" />
+			<forward name="selectList" path="/WEB-INF/uitool/list/selectList.jsp" module="" />
+			<forward name="multiSelList" path="/WEB-INF/uitool/list/multiSelList.jsp" module="" />
+			<forward name="download" path="/downloadXlsFile" module="" redirect="true"/>
+			<forward name="listContact" path="/WEB-INF/uitool/list/lisCtrl_contact.jsp" module="" />
+			<forward name="listPoint" path="/WEB-INF/uitool/list/list_point.jsp" module="" />
+			<forward name="list_exbhition" path="/WEB-INF/uitool/list/list_exbhition.jsp" module="" />
+			<forward name="list_exbhitionhall" path="/WEB-INF/uitool/list/list_exbhitionhall.jsp" module="" />
+            <forward name="listEmailTemp" path="/WEB-INF/uitool/list/list_email_temp.jsp" module="" />
+			<forward name="listStationMsg" path="/WEB-INF/uitool/list/list_station_msg.jsp" module="" />
+		</action>
+		<action path="/uitoolChart" type="com.focustech.uitool.list.action.UIToolChartCtrlAction" name="uitoolChartForm" scope="request">
+			<forward name="chart" path="/WEB-INF/uitool/chart/chartCtrl.jsp" module="" />
+		</action>
+		<action path="/uitoolOper" type="com.focustech.uitool.list.action.UIToolOperCtrlAction" name="uitoolOperForm"
+			scope="request">
+			<forward name="page" path="/WEB-INF/uitool/oper/operCtrl.jsp" module="" />
+			<forward name="exeok" path="/WEB-INF/uitool/oper/operCtrlOk.jsp" module="" />
+		</action>
+		<action path="/refresh" type="com.focustech.uitool.list.action.UIToolRefreshAction" name="refreshFrom" scope="request">
+		</action>
+		<action path="/queue" type="com.focustech.oss2008.web.controller.QueueController" scope="request">
+			<forward name="list" path="/WEB-INF/jsp/queue/list.jsp"></forward>
+			<forward name="remind" path="/WEB-INF/jsp/queue/remind.jsp"></forward>
+		</action>
+	</action-mappings>
+
+	<controller>
+		<set-property value="com.focustech.uitool.framework.servlet.NLRequestProcessor" property="processorClass" />
+		<set-property value="true" property="nocache" />
+	</controller>
+	<message-resources parameter="com.focustech.uitool.framework.resources.FrameworkResources" />
+
+</struts-config>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE uitool PUBLIC "-//NewLand UITool //DTD Direct Web Remoting 1.0//EN" "../function-config.dtd">
+<!-- main config file ,this config file is required -->
+<function-config>
+    <system sysId="0000">
+        <function id="1080329" beanName="">
+            <execute-sql>
+                <sql id="paint_model">
+                    <![CDATA[
+					select *
+					from (
+						select 
+ADDER_NAME,
+ADDER_SN,
+ADD_TIME,
+DOWNLOAD_COUNT,
+HOUSE_TYPE,
+MODEL_FILE_SN,
+MODEL_TYPE,
+NAME,
+PIC_FILE_SN,
+SN,
+UPDATER_NAME,
+UPDATER_SN,
+UPDATE_TIME,
+USE_COUNT
+ from paint_model
+					) a where 1=1
+					]]>
+                </sql>
+            </execute-sql>
+            <func-sql id="1" sqlId="paint_model" loop="false" sqlType="select" argGroup="0" executer="">
+                <params id="" errMsg="查询列表信息出错">
+                </params>
+            </func-sql>
+        </function>
+    </system>
+</function-config>

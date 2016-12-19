@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE tables PUBLIC "" "table.dtd">
+<tables>
+	<table displayName="ノめ" name="aaa" schema="micOss2005" dataSource="OSS_ADMIN_USER" pageDataSize = "4" >
+		<columns>
+			<column name="USER_ID"  displayName="ノめID" type = 'int' sortable="true" url="/test.do?id=~USER_ID~" >
+			<searchCondition name = "me"  displayName="ノめID"  />		
+			<searchCondition name = "le"  displayName="ノめID"  />		
+			</column>
+		
+		<column name="FULLNAME"  displayName=""  type = 'String' sortable="false" >
+			<searchCondition name = "str"  displayName="" />			
+		</column>
+
+	<column name="LOGIN_NAME"  displayName="祅嘲" type = 'String' searchable = "false" sortable="true" url="/test.do?id=#sessionName#">
+			<searchCondition name = "e"  displayName="祅嘲"/>			
+	</column>
+
+	<column name="GENDER"  displayName="┦"  type = "int" searchType = "list" parameterName="PARAM_TYPE_SEX" sortable="false">
+			<searchCondition name = "e" displayName="┦"/>			
+	</column>
+
+	<column name="EMAIL"  displayName="EMAIL"  type = 'String' searchable = "false"  width="200"  sortable="false">					
+	</column>
+
+<column name="CREATED_TIME"  displayName="承丁" type = 'datetime' searchable = "true"  searchType = "date"  width="200" sortable="false">	
+			<searchCondition name = "m"  displayName="承丁"/>		
+	</column>
+
+
+		</columns>
+		
+		<action view = "/delete.do?id=~USER_ID~" modify = "/delete.do?id=~USER_ID~" bulkDelete="/getTable.do?method=kk&amp;name=~FULLNAME~" />
+		<roles>
+			<role name="id" scope="id = ?"></role>
+		</roles>
+	</table>
+	
+	
+	
+		
+		<table displayName="ノめ" name="bbb" schema="mic2005" dataSource="CORE_COMPANY_CN_MAINT_CHK" pageDataSize = "20" >
+		<columns>
+			<column name="COM_ID"  displayName="ノめID"  type = 'int' sortable="true" url="/test.do?id=~COM_ID~" >
+			<searchCondition name = "n" displayName="ノめID"  />			
+			</column>	
+		</columns>
+	<action  bulkDelete="/getTable.do?method=kk&amp;name=~COM_ID~" />
+		<roles>
+			<role name="id" scope="id = ?"></role>
+		</roles>
+	</table>
+	
+	
+
+	
+</tables>

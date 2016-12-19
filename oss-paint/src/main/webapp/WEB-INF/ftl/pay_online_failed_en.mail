@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>~!title!~</title>
+<meta http-equiv="Content-Type" content="text/html; charset= ">
+<STYLE TYPE="text/css">
+<!--
+A {COLOR: #000070; TEXT-DECORATION: underline}
+A:hover {COLOR: #ef7500; TEXT-DECORATION: underline}
+A:active {COLOR: #ef7500; TEXT-DECORATION: underline}
+td{font-size:9pt;font-family:verdana,arial}
+body {font-size:9pt;font-family:verdana,arial}
+p{font-size:9pt;font-family:verdana,arial}
+-->
+</STYLE>
+</head>
+<body>
+<p>Dear ${sender_name},</p>
+<p>We are sorry to inform you that  your online payment application was failed, and you are not entitled to receive  and view Audit Report from Made-in-China.com. This may be caused by your  suspension of the payment or the transmission trouble in the process of  payment.</p>
+<p>The payment information and contact  details on Made-in-China.com are as
+below:</p>
+<b>Order Details</b><br>
+--------------------------------------------------------------------------------- <br>
+<b>Order Number:</b> ${item_number}<br>
+<b>Service Name:</b> ${server_name}<br>
+<b>Price of Service:</b> ${price}<br><br>
+<b>Contact Details</b><br>
+--------------------------------------------------------------------------------- <br>
+${company_name}
+${pay_name}
+<b>Your Email:</b> ${pay_email}<br>
+</b> ${pay_phone}
+${pay_country}
+<br>
+<p>To view and download Audit Reports,  you need to try the online payment via Paypal again, or contact us for other  methods.</p>
+<p>Please confirm that your  information are correct and make sure that we can get in touch with you via  e-mail. Thank you for your kind co-operation.</p>
+<p>&nbsp;</p>
+<p>Best Regards,</p>
+<p>
+Made-in-China.com<br>
+<a href="http://www.made-in-china.com">http://www.made-in-china.com</a><br>
+<a href="mailto:auditreports@made-in-china.com">auditreports@made-in-china.com</a>
+</p>
+</body>
+</html>

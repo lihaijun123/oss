@@ -1,0 +1,78 @@
+		body {
+			font-family: Helvetica, Verdana, Arial, sans-serif;
+			background-color: white;
+			color: black;
+
+		}
+		a:link, a:visited {
+			color: #000;
+		}
+		a:active, a:hover {
+			color: #666;
+		}
+		p.header {
+			font-size: small;
+		}
+		p.header span {
+			font-weight: bold;
+		}
+		p.footer {
+			font-size: x-small;
+		}
+		div.content {
+			margin: auto;
+			width: 1280px;
+		}
+		div.missing {
+			margin: auto;
+			position: relative;
+			top: 50%;
+			width: 193px;
+		}
+		div.missing a {
+			height: 63px;
+			position: relative;
+			top: -31px;
+		}
+		div.missing img {
+			border-width: 0px;
+		}
+		div#unityPlayer {
+			float:left;
+			cursor: default;
+			height: 100%;
+			width: 100%;
+		}
+/*new.html*/
+	.LoadedModelUl {margin:15px 0px;}
+	.LoadedModelUl li{background-color:#CCCC66;margin:5px;height:20px;width:190px;font:12px;}
+	.LoadedModelUl .notOpr{background-color:#DDDDDD;color:#B5B5B5}
+/*comp_list.html*/
+  	#compTypeDiv{background-color:#E1E100;margin:5px}
+	#compTypeDiv p{margin:5px}
+
+	#LoadedModelDiv,#compListDiv{overflow-x:hidden;overflow-y:scroll;height:600px;}
+
+	#compListDiv .compListUl li{height:85px;font:12px;background-color:#87CEFA;margin:5px}
+
+	#compListDiv .imgDiv{float:left;}
+	#compListDiv .compOpr{height:75px;width:90px;overflow:hidden;}
+	#compListDiv .compOpr button{width:60px}
+
+	#compListDiv img{height:75px;width:75px;margin:5px}
+	.compType{height:25px;background-color:#FFDC35;margin:5px}
+	.compType h2{margin-left:5px;float:left;}
+
+	.divide-ico{
+		float: left;
+		width: 6px;
+		height: 6px;
+		margin-top: 5px;
+		padding-left: 8px;
+		background:url(/images/level-plus.png) no-repeat left 0;
+		cursor: pointer;
+		}
+	.divide-icore{background:url(/images/level-min.png);no-repeat left 0;}
+
+	.compOpr h4{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;height:54px;display:block;}
+	.LoadedModelUl li{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:block;}

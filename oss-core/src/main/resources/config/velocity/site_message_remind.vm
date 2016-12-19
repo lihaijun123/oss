@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GB2312" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<table width="700" align="center" cellpadding="0" cellspacing="10" style="font-family:Tahoma, Arial, sans-serif; font-size:12px; line-height:1.8">
+	<tr>
+		<td><img src="${voDomain}/images/logo_email.gif" alt=""/></td>
+	</tr>
+	<tr>
+		<td colspan="2"><table width="698" border="0" align="center" cellpadding="0" cellspacing="1" style="font-size:12px;font-family:Tahoma, Arial, sans-serif; border:1px solid #dedede" bgcolor="#ffffff">
+				<tr>
+					<td style="font-size:14px; padding:15px 15px 0;line-height:24px;">
+						尊敬的${recvName}，您好！<br/>
+						以下是您在江苏工业数字虚拟展览馆收到的一封商务信函，建议您<a href="${voDomain}/logon" style="color:#4171DF;text-decoration:none">登录</a>网站尽快处理。
+						</td>
+						</tr>
+		<td style="padding:15px">
+						<table cellpadding="0" cellspacing="0" border="0" style="font-size:12px">
+							<tr>
+								<td cellpadding="0" cellspacing="0" border="0" bgcolor="#cccccc">
+									<table width="560" cellspacing="1" cellpadding="6" border="0" style="font-family:Tahoma, Arial, sans-serif; font-size:12px;">
+										<tr>
+											<td style="width:85px" align="right" bgcolor="#f5f5f5">主题</td><td bgcolor="#ffffff"><strong>${title}</strong></td>
+										</tr>
+										<tr>
+											<td align="right" bgcolor="#f5f5f5">收件人</td>
+											<td bgcolor="#ffffff">${recvName}</td>
+										</tr>
+										<tr>
+											<td align="right" bgcolor="#f5f5f5">时间</td>
+											<td bgcolor="#ffffff">${sendTime}</td>
+										</tr>
+										<tr>
+											<td align="right" bgcolor="#f5f5f5">内容</td>
+											<td bgcolor="#ffffff">${content}</td>
+										</tr>
+										<tr>
+											<td align="right" bgcolor="#f5f5f5">发件人</td>
+											<td bgcolor="#ffffff">${senderName}</td>
+										</tr>
+										<tr>
+											<td align="right" bgcolor="#f5f5f5">电子邮箱</td>
+											<td bgcolor="#ffffff">${senderMail}</td>
+										</tr>
+										${senderComName}
+										${senderPhone}
+										${senderMobile}
+										${senderFax}
+									</table></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr bgcolor="#f2f2f2" style="color:#777">
+					<td style="padding:10px 15px;line-height:20px;">如果您有任何问题，请联系我们！<br/>江苏工业数字虚拟展览馆 <br/><a href="http://www.cief.com" style="color:#4171DF;text-decoration:none">www.cief.com</a></td>
+				</tr>
+			</table></td>
+	</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="BIG5"?>
+<!ELEMENT tables (
+	table*
+)>
+<!ELEMENT table (
+	columns,roles?,action?
+)>
+<!ATTLIST table name ID #REQUIRED>
+<!ATTLIST table pageDataSize CDATA #IMPLIED>
+<!ATTLIST table displayName CDATA #REQUIRED>
+<!ATTLIST table schema CDATA #REQUIRED>
+<!ATTLIST table dataSource CDATA #REQUIRED>
+<!ATTLIST table dataConstructEngine (jdbc_sql | jdbc_table |hibernate_object | hiberante_hql | ibatis_sql ) "jdbc_table">
+
+<!ELEMENT columns ( column*)>
+
+<!ELEMENT column (
+	(searchCondition)*,(foreignTable)?
+)>
+
+<!ATTLIST column name CDATA #REQUIRED>
+<!ATTLIST column displayName CDATA #IMPLIED>
+<!ATTLIST column visible (true | false) "true">
+<!ATTLIST column type CDATA #IMPLIED>
+<!ATTLIST column sortable (true | false) "true">
+<!ATTLIST column searchable (true | false) "true">
+<!ATTLIST column displayType (input | image | link | list) "input">
+<!ATTLIST column url CDATA #IMPLIED>
+<!ATTLIST column order CDATA #IMPLIED>
+<!ATTLIST column width CDATA #IMPLIED>
+<!ATTLIST column searchType (input | list | date) "input">
+<!ATTLIST column nameUrl CDATA #IMPLIED>
+<!ATTLIST column parameterName CDATA #IMPLIED>
+
+<!ELEMENT roles ( role*)>
+<!ELEMENT role (
+	(searchCondition)*
+)>
+<!ATTLIST role name CDATA #REQUIRED>
+<!ATTLIST role scope CDATA #IMPLIED>
+
+
+
+<!ELEMENT searchCondition EMPTY>
+<!ATTLIST searchCondition name (e | m | l | me | le | like | n | str) "e">
+<!ATTLIST searchCondition displayName CDATA  #IMPLIED>
+
+<!ELEMENT action EMPTY>
+<!ATTLIST action delete CDATA  #IMPLIED>
+<!ATTLIST action view CDATA  #IMPLIED>
+<!ATTLIST action modify CDATA  #IMPLIED>
+<!ATTLIST action bulkDelete CDATA  #IMPLIED>
+
+<!ELEMENT foreignTable EMPTY>
+<!ATTLIST action name CDATA  #IMPLIED>
+<!ATTLIST action key CDATA  #IMPLIED>
+<!ATTLIST action value CDATA  #IMPLIED>

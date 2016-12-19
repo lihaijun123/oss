@@ -1,0 +1,96 @@
+@charset "utf-8";
+/*Pop*/
+.popTable th{ background-image:url(/images/vo_rp.png); background-repeat:repeat-x }
+.popBox .tl, .popBox .tr, .popBox .bt, .popBox .bt .br { background-image:url(/images/round_corner_bg.png); background-repeat:no-repeat }
+.popContent2 { height:240px; padding:10px 10px 0; zoom:1; overflow:hidden; margin-bottom:36px }
+.popContent2 { overflow-y:auto; position:relative}
+.popContent, .popContent2 { height:240px; padding:10px 10px 0; zoom:1; margin-bottom:36px }
+.popBox .hd h2 { background-image:url(/images/vo_rp.png); background-repeat:repeat-x }
+.popBox { width:415px }
+.popBox .hd { position:relative; padding:0 9px; zoom:1 }
+.popBox .hd h2 { color:#fff; line-height:26px; height:27px; font-size:12px; padding-left:5px }
+.tl, .tr, .bl, .br { display:inline-block; position:absolute }/*模块的圆角*/
+.blc, .brc { display:inline-block; font-size:0; }
+.tl { top:0; left:0 }
+.tr { top:0; right:0 }
+.bl { bottom:0; left:0 }
+.br { bottom:0; right:0 }
+.popBox .tl, .popBox .tr, .popBox .bt .br { width:9px }
+.popBox .tl, .popBox .tr { z-index:2; height:27px; }
+.popBox .tl { background-position:0 -55px }
+.popBox .tr { background-position:0 -83px }
+.popBox .bd, .popBox .bd2, .popBox .bd3 {overflow:hidden; zoom:1; background:#fafcff url(/images/pop_body_bg.png) repeat-x 0 bottom; position:relative }
+/*.popBox .bd, .popBox .bd2, .popBox .bd3 { padding-bottom:36px }*/
+.popBox .bd2 { background-image:url(../images/pop_body_bg2.png); height:60px; padding:10px 10px 36px; }
+.popBox .bd2 a{ color:#4171DF}
+.popBox .bd2 a:hover{ color:#ff8300; text-decoration:underline}
+.popBox .bt { display:block; height:8px; background-position:0 -111px; padding-left:8px; position:relative; zoom:1; overflow:hidden }
+.popBox .warn, .popBox .success { margin:10px 15px}
+.popBox .bline { background:#b3d2fb; margin-right:9px; height:8px }
+.popBox .bt .br { right:0; top:0; height:8px; overflow:hidden; zoom:1; width:9px; background-position:0 -121px }
+.popBox .pClose { display:block; width:9px; height:9px; background:url(/images/pop_close_b.gif) no-repeat; position:absolute; right:14px; top:9px; border:0; cursor:pointer; z-index:5}
+.popBox .cmdBox { padding:6px 18px 2px; text-align:right; clear:both; overflow:hidden; zoom:1 }
+.popBtnWrap { position:absolute; right:10px; bottom:0 }
+.popBtn { text-align:center; margin-left:3px; background-color:transparent }
+.popBtnWrap .popBtn { margin-top:0; font-size:12px}
+.exhibClose,.popBtn,.loginBtn,.regBtn{width:95px;height:27px; color:#fff;background-position:0 -171px;line-height:27px}
+.popTip { padding-left:20px; margin-bottom:6px; background-position:-67px -219px;background-position:-67px -219px\9;color:#2a5a96}
+.popTip a { color:#4171DF; text-decoration:underline }
+.wrong{color:#8e2c11;background-position:-119px 4px;background-position:-119px 2px\9;padding-left:14px;display:block;margin-top:2px}
+.submit,.rnBtn,.exhibClose,.popBtn,.listSearBtn,.loginBtn,.regBtn,.commonSml{border:0;height:27px;width:96px;background-color:transparent; cursor:pointer; padding-top:3px\9;*padding-top:2px}
+.popSearch button, .exhibClose, .popBtn, .rnBtn, .submit, .listSearBtn, .btOpr, .regBtn, .searBtn, .searBtn span, .commonSml, .otherBtn, .otherBtn span,.turnBtn{ background-image:url(../images/button.png); background-repeat:no-repeat }
+/*pop table,form*/
+.popTable th { background-position:0 -225px; background-color:#2b5295; height:26px; font-weight:normal; color:#fff; line-height:26px; padding:0 5px; text-align:center;border-right: 0px solid #ffffff;}
+.popTable .title { border:1px solid #2d5496 }
+.popTable td { border:1px solid #e7e6e6; padding:4px 5px; text-align:center }
+.popTable .yellow_tip_pic { border:0px solid #e7e6e6; text-align:center; font-size:12px;height:8px;width:10px}
+.popTable .yellow_tip_word { border:0px solid #e7e6e6; text-align:center; font-size:12px;height:8px;width:60px}
+.popTable a{color:#4171df}
+.popTable a:hover{ color:#ff8300}
+/**/
+/*book meeting*/
+#bookMeeting { width:650px }
+#bookMeeting .popContent2 { padding-bottom:0; height:365px; * height:362px;margin-bottom:10px }
+#bookMeeting table { width:630px; }
+#bookMeeting .booking, #bookMeeting .room { background:#e6ecf2 }
+#bookMeeting .booking { color:#4668a3 }
+#bookMeeting .bookOpr { text-align:center; padding-bottom:2px }
+#bookMeeting .tipTable { width:100px; }
+
+.popForm .uploadifyQueue{ margin-top:8px}
+/**/
+#mettingIntro{ width:310px}
+#mettingIntro td,#mettingIntro th{ padding:3px 0}
+
+.popForm .remark-lab label {margin-right:5px}
+
+.popBox .book-Wrap {height:auto;padding:10px}
+.pClose {background: url(/images/pop_close_b.gif) no-repeat scroll 0 0 transparent;border: 0 none;cursor: pointer;display: block;height: 9px;position: absolute;right: 14px;top: 9px;width: 9px;z-index: 5;}
+.threed {
+  background: url(/images/3d.gif) no-repeat scroll 0 0 transparent;
+  float: left;
+  height: 14px;
+  text-indent: -9999em;
+  width: 24px;
+}
+.popBox .bd-re-modules ,.moveTo-modules{height:390px;}
+.popBox .crazybod {padding:0}
+.proBody  .toProdInfo-res {margin:0 0 5px 5px;}
+/*弹出层移动样式*/
+.groupDiv { display:none; z-index:99; left:50%; top: 45%; margin-top:0px; }
+/*遮罩背景*/
+.hezc-bg { background-color: #ccc; width: 100%; height: 100%; left:0; top:0; filter:alpha(opacity=50); opacity:0.5; z-index:1; position:fixed!important; position:absolute; }
+/*提示信息*/
+.success, .error, .warn, .popTip, .wrong,.ok2,.error2{ background-image:url(/images/tip_icon.png); background-repeat:no-repeat }
+.date-wrong{color:#8e2c11;background-position:-119px 4px;background-position:-119px 2px\9;padding-left:14px;display:block;margin-top:2px}
+.date-wrong{ background-image:url(/images/tip_icon.png); background-repeat:no-repeat }
+
+
+
+
+
+
+
+
+
+

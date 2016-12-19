@@ -1,0 +1,18 @@
+html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td{margin:0;padding:0;}
+img,body,html{border:0;}
+address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}
+ol,ul{list-style:none;}
+caption{text-align:left;}
+th{text-align:right;}
+h1,h2,h3,h4,h5,h6{font-size:100%;}
+q:before,q:after{content:'';}
+body{
+	font-size: 12px; color: #000000; font-family: "verdana",  "ß∫≈È";
+	margin:0px;
+	SCROLLBAR-FACE-COLOR: #CFE2FC;
+	SCROLLBAR-HIGHLIGHT-COLOR: #fcfcfc;
+	SCROLLBAR-3DLIGHT-COLOR: #7eabf7;
+	SCROLLBAR-ARROW-COLOR: #2F5FAE;
+	SCROLLBAR-TRACK-COLOR: #e3f0ff;
+	SCROLLBAR-DARKSHADOW-COLOR: #CEE1FD;
+}

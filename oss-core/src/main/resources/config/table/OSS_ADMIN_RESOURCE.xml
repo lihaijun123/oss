@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE tables PUBLIC "" "table.dtd">
+<tables>
+	<table displayName="戈方" name="ccc" schema="micOss2005" dataSource="OSS_ADMIN_RESOURCE" pageDataSize = "20" >
+		<columns>
+			<column name="RESOURCE_ID"  displayName="戈方ID"  type = 'int' sortable="true"  >
+			<searchCondition name = "me"  displayName="戈方ID"  />		
+			<searchCondition name = "le"  displayName="戈方ID"  />	
+			</column>	
+			
+			<column name="RESOURCE_NAME"  displayName="戈方" type = 'String' searchable = "true" sortable="true" url="/test.do?id=~RESOURCE_ID~">
+			<searchCondition name = "e"  displayName="戈方"/>			
+			</column>
+			
+				<column name="RESOURCE_TYPE"  displayName="戈方摸" type = 'String'  searchType = "list"  searchable = "true"   parameterName="PARAM_TYPE_RESOURCE_TYPE" sortable="false" >		
+				<searchCondition name = "e"  displayName="戈方摸"/>						
+			</column>
+			
+			<column name="RESOURCE_DISPLAY"  displayName="戈方琌陪ボ" type = 'String' searchType = "list"   parameterName="PARAM_TYPE_DISPLAY">		
+						
+			</column>
+			
+			
+			<column name="DESCRIPTION"  displayName="磞瓃" type = 'String' searchable = "true" sortable="false">	
+			<searchCondition name = "like"  displayName="磞瓃"/>					
+			</column>
+			
+			
+		</columns>
+		<action  bulkDelete="/getTable.do?method=kk&amp;name=~RESOURCE_ID~" />
+		<roles>
+			<role name="id" scope="id = ?"></role>
+		</roles>
+	</table>
+	
+</tables>

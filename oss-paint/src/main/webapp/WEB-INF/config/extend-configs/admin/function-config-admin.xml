@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE uitool PUBLIC "-//NewLand UITool //DTD Direct Web Remoting 1.0//EN" "../function-config.dtd">
+<!-- main config file ,this config file is required -->
+<function-config>
+	<system sysId="0000">
+		<global-sql>
+			<sql id="COMMON_ORDER"
+				creator="com.focustech.uitool.list.interfaces.impl.OrderSqlCreateImpl">
+				<![CDATA[]]>
+			</sql>
+		</global-sql>
+		<function id="185" beanName="">
+			<execute-sql>
+				<sql id="oss_admin_user_list">
+					<![CDATA[
+SELECT *
+FROM (
+	SELECT A.USER_ID,
+       A.FULLNAME,
+       A.AGNAME,
+       A.LOGIN_NAME,
+       A.GENDER,
+       E.ROLE_NAME,
+       A.DEPARTMENT_ID,
+       B.DEPARTMENT_NAME,
+       A.WORKER_ID,
+       A.PASSWORD,
+       A.EMAIL,
+       A.EXTENSION,
+       A.MOBILE_TELEPHONE,
+       A.LDAP_USER_ID,
+       A.DESCRIPTION,
+       A.ACTIVE,
+       A.CREATOR_ID,
+       A.CREATED_TIME,
+       A.MODIFIER_ID,
+       C.FULLNAME MODIFIER_NAME,
+       date_format(A.MODIFIED_TIME,'%Y-%m-%d') MODIFIED_TIME
+  FROM OSS_ADMIN_USER A
+  JOIN OSS_ADMIN_DEPARTMENT B ON A.DEPARTMENT_ID = B.DEPARTMENT_ID
+  LEFT JOIN OSS_ADMIN_USER C ON A.MODIFIER_ID = C.USER_ID
+  LEFT JOIN OSS_ADMIN_USER_ROLE D ON D.USER_ID = A.USER_ID
+  LEFT JOIN OSS_ADMIN_ROLE E ON D.ROLE_ID = E.ROLE_ID
+ WHERE (D.ROLE_ID = &roleId or &roleId is null)
+   AND (B.DEPARTMENT_ID = &departmentId or &departmentId is null)
+      )a
+WHERE 1 = 1
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="oss_admin_user_list" loop="false"
+				sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="查詢系統用戶列表信息出錯。"></params>
+			</func-sql>
+		</function>
+		<function id="182" beanName="">
+			<execute-sql>
+				<sql id="oss_admin_department_list">
+					<![CDATA[
+SELECT *
+FROM (SELECT A.*, B.DEPARTMENT_NAME DEPARTMENT_PARENT_NAME
+      FROM OSS_ADMIN_DEPARTMENT A
+      LEFT JOIN OSS_ADMIN_DEPARTMENT B ON A.DEPARTMENT_PARENT_ID = B.DEPARTMENT_ID
+      CONNECT BY PRIOR A.DEPARTMENT_ID = A.DEPARTMENT_PARENT_ID
+      START WITH A.DEPARTMENT_PARENT_ID = IFNULL(&PARENTID,'0'))
+WHERE 1 = 1
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="oss_admin_department_list"
+				loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="查詢系統機構列表信息出錯。"></params>
+
+			</func-sql>
+		</function>
+		<function id="221" beanName="">
+			<execute-sql>
+				<sql id="oss_admin_resource_url_list">
+					<![CDATA[
+SELECT * FROM OSS_ADMIN_RESOURCE A  WHERE A.RESOURCE_TYPE = 2
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="oss_admin_resource_url_list"
+				loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="查詢系統URL資源信息列表出錯。"></params>
+			</func-sql>
+		</function>
+		<function id="224" beanName="">
+			<execute-sql>
+				<sql id="oss_admin_resource_menu_list">
+					<![CDATA[
+SELECT *
+FROM (SELECT A.*, B.RESOURCE_NAME RESOURCE_PARENT_NAME
+      FROM OSS_ADMIN_RESOURCE A
+      LEFT JOIN OSS_ADMIN_RESOURCE B ON A.RESOURCE_PARENT_ID = B.RESOURCE_ID
+      WHERE A.RESOURCE_TYPE = 1)a
+WHERE 1 = 1
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="oss_admin_resource_menu_list"
+				loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="查詢系統MENU資源信息列表出錯。"></params>
+			</func-sql>
+		</function>
+		<function id="225" beanName="">
+			<execute-sql>
+				<sql id="oss_admin_resource_method_list">
+					<![CDATA[
+SELECT * FROM OSS_ADMIN_RESOURCE A  WHERE A.RESOURCE_TYPE = 3
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="oss_admin_resource_method_list"
+				loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="查詢系統METHOD資源信息列表出錯。"></params>
+			</func-sql>
+		</function>
+		<function id="226" beanName="">
+			<execute-sql>
+				<sql id="oss_admin_role_list">
+					<![CDATA[
+select * from(SELECT a.*,a.role_id role_id1 FROM oss_admin_role a) WHERE 1=1
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="oss_admin_role_list" loop="false"
+				sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="查詢系統角色信息列表出錯。"></params>
+			</func-sql>
+		</function>
+
+		<function id="227" beanName="">
+			<execute-sql>
+				<sql id="ossadmin_role_url_res_list">
+					<![CDATA[
+SELECT * FROM (
+SELECT A.RESOURCE_ID
+	  ,A.RESOURCE_ID `KEY`
+	  ,A.RESOURCE_NAME
+	  ,A.RESOURCE_PARENT_ID
+	  ,B.RESOURCE_ID OLD_KEY
+	  ,A.RESOURCE_INTERFACE
+	  ,CONCAT('<input type="text" name="dataScope" style="width:100%" value="' , B.DATA_SCOPE_FORMULA , '"/>') DATA_SCOPE
+FROM OSS_ADMIN_RESOURCE A
+LEFT JOIN OSS_ADMIN_ROLE_RESOURCE B ON A.RESOURCE_ID = B.RESOURCE_ID
+								AND B.ROLE_ID = &ROLEID
+WHERE A.RESOURCE_TYPE = 2 ORDER BY A.RESOURCE_ORDER)a
+WHERE 1=1
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="ossadmin_role_url_res_list"
+				loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="查詢系統角色URL信息列表出錯。"></params>
+			</func-sql>
+		</function>
+		<function id="228" beanName="">
+			<execute-sql>
+				<sql id="ossadmin_role_menu_res_list">
+					<![CDATA[
+SELECT *
+FROM (SELECT A.RESOURCE_ID
+			,A.RESOURCE_ID `KEY`
+			,CONCAT(LPAD('　》', LEVEL * 4-4, '　》') , A.RESOURCE_NAME) RESOURCE_NAME
+			,A.RESOURCE_PARENT_ID
+			,B.RESOURCE_ID OLD_KEY
+			,A.RESOURCE_INTERFACE
+			,CONCAT('<input type="text" name="dataScope" style="width:100%" value="' , B.DATA_SCOPE_FORMULA , '"/>') DATA_SCOPE
+	  FROM OSS_ADMIN_RESOURCE A
+	  LEFT JOIN OSS_ADMIN_ROLE_RESOURCE B ON A.RESOURCE_ID = B.RESOURCE_ID
+									  AND B.ROLE_ID = &ROLEID
+	  WHERE A.RESOURCE_TYPE = 1
+	  CONNECT BY PRIOR A.RESOURCE_ID = A.RESOURCE_PARENT_ID
+	  START WITH A.RESOURCE_PARENT_ID = 0
+	  ORDER SIBLINGS BY A.RESOURCE_ORDER)a
+WHERE 1 = 1
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="ossadmin_role_menu_res_list"
+				loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="查詢系統角色MENU信息列表出錯。"></params>
+			</func-sql>
+		</function>
+		<function id="229" beanName="">
+			<execute-sql>
+				<sql id="ossadmin_role_method_res_list">
+					<![CDATA[
+SELECT * FROM (
+SELECT A.RESOURCE_ID
+	  ,A.RESOURCE_ID `KEY`
+	  ,A.RESOURCE_NAME
+	  ,A.RESOURCE_PARENT_ID
+	  ,B.RESOURCE_ID OLD_KEY
+	  ,A.RESOURCE_INTERFACE
+	  ,CONCAT('<input type="text" name="dataScope" style="width:100%" value="' , B.DATA_SCOPE_FORMULA , '"/>') DATA_SCOPE
+FROM OSS_ADMIN_RESOURCE A
+LEFT JOIN OSS_ADMIN_ROLE_RESOURCE B ON A.RESOURCE_ID = B.RESOURCE_ID
+								AND B.ROLE_ID = &ROLEID
+WHERE A.RESOURCE_TYPE = 3 ORDER BY A.RESOURCE_ORDER)a
+WHERE 1=1
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="ossadmin_role_method_res_list"
+				loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="查詢系統角色METHOD信息列表出錯。"></params>
+			</func-sql>
+		</function>
+		<function id="727" beanName="">
+			<execute-sql>
+				<sql
+					id="role_department_customer_count_upper_limit_list">
+					<![CDATA[
+SELECT *
+FROM (SELECT L.RECORD_ID `KEY`, L.RECORD_ID, R.ROLE_NAME, D.DEPARTMENT_NAME, L.LIMIT_COUNT
+	  FROM CRM_ACCOUNT_COUNT_LIMIT L
+	  JOIN OSS_ADMIN_ROLE R ON R.ROLE_ID = L.ROLE_ID
+	  JOIN OSS_ADMIN_DEPARTMENT D ON D.DEPARTMENT_ID = L.DEPARTMENT_ID
+	  ORDER BY L.ROLE_ID, L.DEPARTMENT_ID)a
+WHERE 1 = 1
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1"
+				sqlId="role_department_customer_count_upper_limit_list" loop="false"
+				sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="查詢角色客戶數量限制信息列表出錯。"></params>
+			</func-sql>
+		</function>
+
+		<function id="230" beanName="">
+			<execute-sql>
+				<sql id="ossadmin_user_menu_res_list">
+					<![CDATA[
+SELECT *
+FROM (SELECT A.RESOURCE_ID
+			,A.RESOURCE_ID `KEY`
+			,CONCAT(LPAD('　》', LEVEL * 4-4, '　》') , A.RESOURCE_NAME) RESOURCE_NAME
+			,A.RESOURCE_PARENT_ID
+			,B.RESOURCE_ID OLD_KEY
+			,A.RESOURCE_INTERFACE
+	  FROM OSS_ADMIN_RESOURCE A
+	  LEFT JOIN OSS_ADMIN_USER_RESOURCE B ON A.RESOURCE_ID = B.RESOURCE_ID
+									  AND B.USER_ID = &USERID
+	  WHERE A.RESOURCE_TYPE = 1
+	  CONNECT BY PRIOR A.RESOURCE_ID = A.RESOURCE_PARENT_ID
+	  START WITH A.RESOURCE_PARENT_ID = 0
+	  ORDER SIBLINGS BY A.RESOURCE_ORDER)a
+WHERE 1 = 1
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="ossadmin_user_menu_res_list"
+				loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="查詢系統用戶MENU信息列表出錯。"></params>
+			</func-sql>
+		</function>
+
+		<function id="231" beanName="">
+			<execute-sql>
+				<sql id="ossadmin_user_url_res_list">
+					<![CDATA[
+SELECT * FROM (
+SELECT A.RESOURCE_ID
+	  ,A.RESOURCE_ID `KEY`
+	  ,A.RESOURCE_NAME
+	  ,A.RESOURCE_PARENT_ID
+	  ,B.RESOURCE_ID OLD_KEY
+	  ,A.RESOURCE_INTERFACE
+FROM OSS_ADMIN_RESOURCE A
+LEFT JOIN OSS_ADMIN_USER_RESOURCE B ON A.RESOURCE_ID = B.RESOURCE_ID
+								AND B.USER_ID = &USERID
+WHERE A.RESOURCE_TYPE = 2)a
+WHERE 1=1
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="ossadmin_user_url_res_list"
+				loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="查詢系統用戶URL信息列表出錯。"></params>
+			</func-sql>
+		</function>
+
+		<function id="232" beanName="">
+			<execute-sql>
+				<sql id="ossadmin_user_method_res_list">
+					<![CDATA[
+SELECT * FROM (
+SELECT A.RESOURCE_ID
+	  ,A.RESOURCE_ID `KEY`
+	  ,A.RESOURCE_NAME
+	  ,A.RESOURCE_PARENT_ID
+	  ,B.RESOURCE_ID OLD_KEY
+	  ,A.RESOURCE_INTERFACE
+FROM OSS_ADMIN_RESOURCE A
+LEFT JOIN OSS_ADMIN_USER_RESOURCE B ON A.RESOURCE_ID = B.RESOURCE_ID
+								AND B.USER_ID = &USERID
+WHERE A.RESOURCE_TYPE = 3)a
+WHERE 1=1
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="ossadmin_user_method_res_list"
+				loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="查詢系統用戶METHOD信息列表出錯。"></params>
+			</func-sql>
+		</function>
+
+		<function id="254" beanName="">
+			<execute-sql>
+				<sql id="crm_office_area_list">
+					<![CDATA[
+SELECT * FROM
+(
+SELECT T.RECORD_ID,
+	   T.DEPARTMENT_ID,
+	   D.DEPARTMENT_NAME,
+       D.DEPARTMENT_PARENT_ID,
+       D.DEPARTMENT_PARENT_NAME,
+	   T.CITY
+  FROM CRM_OFFICE_AREA T,(select D.DEPARTMENT_ID,D.DEPARTMENT_NAME,D.DEPARTMENT_PARENT_ID,E.DEPARTMENT_NAME DEPARTMENT_PARENT_NAME
+	from OSS_ADMIN_DEPARTMENT D left join OSS_ADMIN_DEPARTMENT E on D.DEPARTMENT_PARENT_ID=E.DEPARTMENT_ID) D
+	WHERE T.DEPARTMENT_ID = D.DEPARTMENT_ID
+  ORDER BY T.RECORD_ID DESC
+)a
+WHERE 1=1
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="crm_office_area_list"
+				loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="會員查詢區域範圍控制列表出錯。"></params>
+			</func-sql>
+		</function>
+
+		<function id="255" beanName="">
+			<execute-sql>
+				<sql id="oss_admin_role_model_list">
+					<![CDATA[
+SELECT *
+  FROM (SELECT T.RECORD_ID, T.ROLE_ID, R.ROLE_NAME, T.MODEL
+          FROM OSS_ADMIN_ROLE_MODEL T
+          LEFT JOIN OSS_ADMIN_ROLE R ON T.ROLE_ID = R.ROLE_ID
+         WHERE (T.ROLE_ID = &roleId OR &roleId IS NULL)
+           AND (T.MODEL = &model OR &model IS NULL))a
+ WHERE 1 = 1
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="oss_admin_role_model_list"
+				loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="角色模塊信息列表出錯"></params>
+			</func-sql>
+		</function>
+
+		<function id="256" beanName="">
+			<execute-sql>
+				<sql id="oss_admin_bulletin_list">
+					<![CDATA[
+SELECT *
+FROM (SELECT B.BULLETIN_ID
+			,B.BULLETIN_MODEL
+			,B.BULLETIN_TITLE
+			,B.RELATED_URL
+			,B.ACTIVE
+			,(SELECT FULLNAME FROM OSS_ADMIN_USER WHERE USER_ID = B.CREATOR_ID) CREATOR
+			,date_format(B.CREATED_TIME,'%Y-%m-%d') CREATED_TIME
+			,(SELECT FULLNAME FROM OSS_ADMIN_USER WHERE USER_ID = B.MODIFIER_ID) MODIFIER
+			,date_format(B.MODIFIED_TIME,'%Y-%m-%d') MODIFIED_TIME
+			,B.CREATED_TIME CREATED_TIME_SORT
+			,B.MODIFIED_TIME MODIFIED_TIME_SORT
+			,B.BULLETIN_MODEL MODEL
+	  FROM OSS_ADMIN_BULLETIN B
+	  WHERE B.BULLETIN_MODEL = NVL(&bulletinModel, B.BULLETIN_MODEL)
+	  ORDER BY B.MODIFIED_TIME DESC)a
+WHERE 1 = 1
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="oss_admin_bulletin_list"
+				loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="查詢公告信息列表出錯"></params>
+			</func-sql>
+		</function>
+
+		<function id="257" beanName="">
+			<execute-sql>
+				<sql id="resource_role_list">
+					<![CDATA[
+SELECT * FROM
+(
+	SELECT T.ROLE_ID,
+       R.ROLE_NAME
+  	FROM OSS_ADMIN_ROLE_RESOURCE T
+  	LEFT JOIN OSS_ADMIN_ROLE R ON T.ROLE_ID = R.ROLE_ID
+ 	WHERE T.RESOURCE_ID = &resourceId
+ 	ORDER BY T.ROLE_ID
+)a
+WHERE 1 = 1
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="resource_role_list"
+				loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="查詢資源下角色信息出錯"></params>
+			</func-sql>
+		</function>
+
+		<function id="258" beanName="">
+			<execute-sql>
+				<sql id="login_fail_list">
+					<![CDATA[
+SELECT * FROM
+(
+	SELECT U.USER_ID,
+       T.LOGIN_NAME,
+       U.FULLNAME,
+       D.DEPARTMENT_NAME,
+       U.ACTIVE,
+       COUNT(T.LOGIN_NAME) TIMES
+  	FROM OSS_ADMIN_LOGIN_LOG T
+  	LEFT JOIN OSS_ADMIN_USER U ON T.LOGIN_NAME = U.LOGIN_NAME
+  	LEFT JOIN OSS_ADMIN_DEPARTMENT D ON U.DEPARTMENT_ID = D.DEPARTMENT_ID
+ 	WHERE T.LOGIN_STATUS = '0'
+   		AND T.LOGIN_TIME BETWEEN
+       	NVL(TO_DATE(&S_DATE_PRIORD,'yyyy-MM-dd'),add_days(SYSDATE(),-1)) AND
+       	NVL(add_days(TO_DATE(&E_DATE_PRIORD,'yyyy-MM-dd'),1),SYSDATE())
+ 		GROUP BY U.USER_ID, T.LOGIN_NAME, U.FULLNAME, D.DEPARTMENT_NAME, U.ACTIVE
+		HAVING COUNT(T.LOGIN_NAME) >= ifnull(&failTimes,3)
+)a
+WHERE 1 = 1
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="login_fail_list"
+				loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="登陸失敗記錄列表出錯"></params>
+			</func-sql>
+		</function>
+
+		<function id="259" beanName="">
+			<execute-sql>
+				<sql id="login_fail_detail_list">
+					<![CDATA[
+SELECT * FROM
+(
+	SELECT T.MODEL_NAME,
+       T.LOGIN_NAME,
+       date_format(T.LOGIN_TIME, '%Y-%m-%d %H:%i:%s') LOGIN_TIME,
+       T.LOGIN_IP,
+       T.REMARK,
+       U.USER_ID
+  	FROM OSS_ADMIN_LOGIN_LOG T
+  	LEFT JOIN OSS_ADMIN_USER U ON T.LOGIN_NAME = U.LOGIN_NAME
+ 	WHERE T.LOGIN_NAME = &loginName
+   		AND T.LOGIN_STATUS = '0'
+   		AND T.LOGIN_TIME BETWEEN
+       		NVL(TO_DATE(&start_time, 'yyyy-MM-dd'), SYSDATE - 1) AND
+       		NVL(TO_DATE(&end_time, 'yyyy-MM-dd') + 1, SYSDATE)
+ 	ORDER BY T.LOGIN_TIME DESC
+)a
+WHERE 1 = 1
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="login_fail_detail_list"
+				loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="登陸失敗記錄詳細列表出錯"></params>
+			</func-sql>
+		</function>
+
+		<function id="261" beanName="">
+			<execute-sql>
+				<sql id="customer_mail_role_count_limit_list">
+					<![CDATA[
+SELECT *
+FROM (SELECT L.RECORD_ID `KEY`, L.RECORD_ID, R.ROLE_NAME, D.DEPARTMENT_NAME, L.SEND_MAIL_LIMIT
+	  FROM CRM_ACCOUNT_COUNT_LIMIT L
+	  JOIN OSS_ADMIN_ROLE R ON R.ROLE_ID = L.ROLE_ID
+	  JOIN OSS_ADMIN_DEPARTMENT D ON D.DEPARTMENT_ID = L.DEPARTMENT_ID
+	  ORDER BY L.ROLE_ID, L.DEPARTMENT_ID)a
+WHERE 1 = 1
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="customer_mail_role_count_limit_list"
+				loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="查詢郵寄客戶角色數量控制列表出錯"></params>
+			</func-sql>
+		</function>
+
+	</system>
+</function-config>

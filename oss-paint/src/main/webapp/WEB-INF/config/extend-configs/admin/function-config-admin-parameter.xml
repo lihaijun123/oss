@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE uitool PUBLIC "-//NewLand UITool //DTD Direct Web Remoting 1.0//EN" "../function-config.dtd">
+<!-- main config file ,this config file is required -->
+<function-config>
+	<system sysId="0000">
+		<function id="262" beanName="">
+			<execute-sql>
+				<sql id="oss_admin_parameter_list">
+					<![CDATA[
+SELECT * FROM OSS_ADMIN_PARAMETER WHERE 1=1
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="oss_admin_parameter_list"
+				loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="查詢系統參數列表出錯"></params>
+			</func-sql>
+		</function>
+
+		<function id="914" beanName="">
+			<execute-sql>
+				<sql id="oss_admin_parameter_add">
+					<![CDATA[
+INSERT INTO OSS_ADMIN_PARAMETER
+  (RECORD_ID,
+   WEBSITE,
+   PARAMETER_TYPE,
+   PARAMETER_NAME,
+   PARAMETER_KEY,
+   PARAMETER_VALUE,
+   PARAMETER_ORDER)
+VALUES
+  (&RECORD_ID,
+   &WEBSITE,
+   &PARAMETER_TYPE,
+   &PARAMETER_NAME,
+   &PARAMETER_KEY,
+   &PARAMETER_VALUE,
+   &PARAMETER_ORDER)
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="oss_admin_parameter_add"
+				loop="false" sqlType="insert" argGroup="0" executer="">
+				<params id="" errMsg="查詢系統參數列表出錯">
+					<param id="RECORD_ID" sequence="S_OSS_ADMIN_PARAMETER"/>
+				</params>
+			</func-sql>
+		</function>
+		<function id="915" beanName="">
+			<execute-sql>
+				<sql id="oss_admin_parameter_view">
+					<![CDATA[
+SELECT * FROM OSS_ADMIN_PARAMETER WHERE RECORD_ID=&RECORD_ID
+]]>
+				</sql>
+				<sql id="oss_admin_parameter_upd">
+					<![CDATA[
+UPDATE OSS_ADMIN_PARAMETER
+SET WEBSITE         = &WEBSITE,
+    PARAMETER_TYPE  = &PARAMETER_TYPE,
+    PARAMETER_NAME  = &PARAMETER_NAME,
+    PARAMETER_KEY   = &PARAMETER_KEY,
+    PARAMETER_VALUE = &PARAMETER_VALUE,
+    PARAMETER_ORDER = &PARAMETER_ORDER
+WHERE RECORD_ID = &RECORD_ID
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="oss_admin_parameter_view"
+				loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="查詢系統參數列表出錯"></params>
+			</func-sql>
+			<func-sql id="2" sqlId="oss_admin_parameter_upd"
+				loop="false" sqlType="update" argGroup="0" executer="">
+				<params id="" errMsg="查詢系統參數列表出錯"></params>
+			</func-sql>
+		</function>
+	</system>
+</function-config>

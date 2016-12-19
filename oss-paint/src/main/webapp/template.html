@@ -1,0 +1,124 @@
+<HTML>
+<HEAD><TITLE>郵件模板</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=BIG5">
+<META http-equiv=Expires content=0>
+<STYLE type=text/css>
+.Disactive {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; WIDTH: 1%; CURSOR: hand; BORDER-BOTTOM: 1px solid; BACKGROUND-COLOR: #dedbd6; TEXT-ALIGN: center
+}
+.Active {
+	CURSOR: hand; BACKGROUND-COLOR: #ffffcc; TEXT-ALIGN: center
+}
+.MainTable {
+	BORDER-RIGHT: #e8e8e8 5px solid; BORDER-TOP: #e8e8e8 5px solid; BORDER-LEFT: #e8e8e8 5px solid; BORDER-BOTTOM: #e8e8e8 5px solid
+}
+.Sample {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; FONT-SIZE: 18px; BORDER-LEFT: 1px solid; BORDER-BOTTOM: 1px solid; BACKGROUND-COLOR: #dedbd6
+}
+.Empty {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; BORDER-LEFT: 1px solid; WIDTH: 1%; CURSOR: default; BORDER-BOTTOM: 1px solid; BACKGROUND-COLOR: #dedbd6
+}
+body,td,th {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+}
+</STYLE>
+<SCRIPT language=javascript>
+var oSample ;
+function insertChar(charValue)
+{
+	window.returnValue = charValue;
+	window.close();
+  if(window.opener.document.getElementById('subjectContent2')!=null)
+     txtarea = window.opener.document.getElementById('subjectContent2');
+  else
+     txtarea = window.opener.document.getElementById('subjectContent2');
+	 
+txtarea.focus();
+if(document.all){
+var range = window.opener.document.selection.createRange();
+range.select();
+range.text=charValue;
+}
+else{
+txtarea.value=txtarea.value.substring(0,txtarea.selectionStart)+charValue+txtarea.value.substring(txtarea.selectionEnd,txtarea.value.length);
+}
+}
+
+function over(td)
+{
+	oSample.innerHTML = td.innerHTML ;
+	td.className = 'Active' ;
+}
+
+function out(td)
+{
+	oSample.innerHTML = "&nbsp;" ;
+	td.className = 'Disactive' ;
+}
+
+function CloseWindow()
+{
+	window.returnValue = null ;
+	window.close() ;
+}
+//-->
+</SCRIPT>
+<BODY bottomMargin=0 leftMargin=0 topMargin=0 rightMargin=0 style="font:11px, Arial, Helvetica, sans-serif">
+<TABLE width="470" cellPadding=0 cellSpacing=5>
+  <TBODY>
+  <tr>
+   <td><TABLE class=MainTable height="75" width="140">
+		<TBODY>
+			<TR>
+				<TD class='Sample' id='SampleTD' align='middle'>&nbsp;</TD>
+			</TR>
+		</TBODY>
+	</TABLE>
+   	</td>
+	    <td><span style="font-size:25px" Style="color:#FF0000">你可以使用郵件模板內容</span></td>
+  </tr>
+  
+  <TR>
+  
+    <TD height="1" colspan="2">
+      <TABLE class=MainTable height="100%" cellSpacing=0 cellPadding=0 
+      width="100%" align=center border=1>
+        <SCRIPT language=javascript>
+var aChars = ["客戶姓名","客戶類型","行業類型","電話","傳真","郵箱","聯系人","系統時間"];
+var aCharsTxt = ["${customer}","${cusType}","${industry}","${tel}","${fax}","${email}","${linkman}","${sysdate}"];
+var cols = 4 ;
+
+var i = 0 ;
+while (i < aChars.length)
+{
+	document.write("<TR>") ;
+	for(var j = 0 ; j < cols ; j++) 
+	{
+		if (aChars[i])
+		{
+			document.write("<TD class='Disactive' onclick=insertChar(aCharsTxt["+i+"]); onmouseover='over(this)' onmouseout='out(this)'>") ;
+			document.write(aChars[i]) ;
+		}
+		else
+			document.write("<TD class='Empty'>&nbsp;") ;
+		document.write("</TD>") ;
+		i++ ;
+	}
+	document.write("</TR>") ;
+}
+</SCRIPT>
+
+        <TBODY></TBODY></TABLE>     </TD>
+    </TR>
+  
+  <TR>
+  	<TD height="1" colspan="2">
+  		<div align="right"><BUTTON onclick=window.close();>close</BUTTON></div></TD>
+  	</TR>
+  </TBODY></TABLE>
+<SCRIPT language=javascript>
+	oSample = document.getElementById("SampleTD") ;
+</SCRIPT>
+</BODY>
+</HTML>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<bean id="mqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="${activemq.brokerurl}" />
+    </bean>
+	<!--产品案例发布topic-->
+	<bean id="prodCasePublishTopicDestination" class="org.apache.activemq.command.ActiveMQTopic">
+    	<constructor-arg>
+    		<value>prodCase_publish</value>
+    	</constructor-arg>
+    </bean>
+	<!--产品案例消息模板-->
+	<bean id="prodCasePublishTopicJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="mqConnectionFactory" />
+        <property name="defaultDestination" ref="prodCasePublishTopicDestination" />
+        <property name="pubSubDomain" value="true" />
+        <property name="receiveTimeout" value="10000" />
+    </bean>
+	<!--banner发布topic-->
+	<bean id="bannerPublishTopicDestination" class="org.apache.activemq.command.ActiveMQTopic">
+    	<constructor-arg>
+    		<value>banner_publish</value>
+    	</constructor-arg>
+    </bean>
+	<!--banner消息模板-->
+	<bean id="bannerPublishTopicJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="mqConnectionFactory" />
+        <property name="defaultDestination" ref="bannerPublishTopicDestination" />
+        <property name="pubSubDomain" value="true" />
+        <property name="receiveTimeout" value="10000" />
+    </bean>
+	<!--appmenu发布topic-->
+	<bean id="appmenuPublishTopicDestination" class="org.apache.activemq.command.ActiveMQTopic">
+    	<constructor-arg>
+    		<value>appwebservice_cache_update</value>
+    	</constructor-arg>
+    </bean>
+	<!--appmenu消息模板-->
+	<bean id="appmenuPublishTopicJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="mqConnectionFactory" />
+        <property name="defaultDestination" ref="appmenuPublishTopicDestination" />
+        <property name="pubSubDomain" value="true" />
+        <property name="receiveTimeout" value="10000" />
+    </bean>
+</beans>

@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<!--
+ * FCKeditor - The text editor for Internet - http://www.fckeditor.net
+ * Copyright (C) 2003-2007 Frederico Caldeira Knabben
+ *
+ * == BEGIN LICENSE ==
+ *
+ * Licensed under the terms of any of the following licenses at your
+ * choice:
+ *
+ *  - GNU General Public License Version 2 or later (the "GPL")
+ *    http://www.gnu.org/licenses/gpl.html
+ *
+ *  - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+ *    http://www.gnu.org/licenses/lgpl.html
+ *
+ *  - Mozilla Public License Version 1.1 or later (the "MPL")
+ *    http://www.mozilla.org/MPL/MPL-1.1.html
+ *
+ * == END LICENSE ==
+ *
+ * Special Chars Selector dialog window.
+-->
+<html>
+	<head>
+		<meta name="robots" content="noindex, nofollow">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<style type="text/css">
+body {
+	font-size: 12px !important;
+}
+
+sub {
+	font-size: 10px !important;
+}
+
+.Hand {
+	cursor: pointer;
+	cursor: hand;
+}
+
+.Sample {
+	font-size: 12px !important;
+}
+</style>
+		<script type="text/javascript">
+
+var oEditor = window.parent.InnerDialogLoaded() ;
+
+var oSample ;
+
+function insertChar(charValue)
+{
+	oEditor.FCKUndo.SaveUndoStep() ;
+	oEditor.FCK.InsertHtml( charValue || "" ) ;
+	window.parent.Cancel() ;
+}
+
+function over(td)
+{
+	if ( ! oSample )
+		return ;
+	oSample.innerHTML = td.innerHTML ;
+	td.className = 'LightBackground SpecialCharsOver Hand' ;
+}
+
+function out(td)
+{
+	if ( ! oSample )
+		return ;
+	oSample.innerHTML = "&nbsp;" ;
+	td.className = 'DarkBackground SpecialCharsOut Hand' ;
+}
+
+function setDefaults()
+{
+	// Gets the sample placeholder.
+	oSample = document.getElementById("SampleTD") ;
+
+	// First of all, translates the dialog box texts.
+	oEditor.FCKLanguageManager.TranslatePage(document) ;
+
+	window.parent.SetAutoSize( true ) ;
+}
+
+		</script>
+	</head>
+	<body onload="setDefaults()" style="overflow: hidden">
+		<table cellpadding="0" cellspacing="0" width="100%" height="100%">
+			<tr>
+				<td width="100%">
+					<table cellpadding="1" cellspacing="1" align="center" border="0"
+						width="100%" height="100%">
+						<script type="text/javascript">
+var aChars = ["客户姓名","客户类型","行业类型","电话","传真","邮箱","联系人","系统时间"];
+var aChars2 = ["${customer}","${cusType}","${industry}","${tel}","${fax}","${email}","${linkman}","${sysdate}"];
+var cols = 4 ;
+
+var i = 0 ;
+while (i < aChars.length)
+{
+	document.write("<TR>") ;
+	for(var j = 0 ; j < cols ; j++)
+	{
+		if (aChars[i])
+		{
+			document.write('<TD width="1%" class="DarkBackground SpecialCharsOut Hand" align="center" onclick="insertChar(\'' + aChars2[i].replace(/&/g, "&amp;") + '\')" onmouseover="over(this)" onmouseout="out(this)">') ;
+			document.write(aChars[i]) ;
+		}
+		else
+			document.write("<TD class='DarkBackground SpecialCharsOut'>&nbsp;") ;
+		document.write("<\/TD>") ;
+		i++ ;
+	}
+	document.write("<\/TR>") ;
+}
+						</script>
+					</table>
+				</td>
+				<td nowrap>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+				</td>
+				<td valign="top">
+					<table width="40" cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<td id="SampleTD" width="40" height="40" align="center"
+								class="DarkBackground SpecialCharsOut Sample">
+								&nbsp;
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

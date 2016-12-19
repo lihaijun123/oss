@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	<!-- copClient属性值注入 -->
+	<bean id="copClient" class="com.focustech.cief.cop.ws.client.cxf.DefaultCopClient" init-method="init">
+		<property name="zookeeperClient" ref="zookeeperClient" />
+		<!--应用端配置的密钥的key,由cop平台提供-->
+		<property name="appKey" value="${soa.client.appkey}" />
+		<!--应用端配置的密钥的value,由cop平台提供-->
+		<property name="appSecret" value="${soa.client.appSecret}" />
+		<!--拦截器-->
+		<property name="interceptors">
+			<list>
+				<ref bean="usernamePasswordInterceptor"/>
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="usernamePasswordInterceptor" class="com.focustech.cief.cop.ws.client.cxf.interceptor.SecurityParamInterceptor">
+		<property name="subSysId" value="${soa.client.SysId}" />
+		<property name="userPasswordMgr" ref="usernamePasswordMgr" />
+	</bean>
+
+	<!-- 下面这个类中获取用户名应该是各个系统有自己获取用户名的方式，千万不要写死，如AuthContext.getAuthUsername() -->
+	<bean id="usernamePasswordMgr" class="com.focustech.focus3d.web.interceptor.CiefUserPasswordManager"/>
+
+</beans>
+

@@ -1,0 +1,24 @@
+@import url("/style/vo.css");
+th,#tabs,.toolbar input,.toolbar button{ font-family:"SimSun"}
+body, td, div{font-family:Arial,Helvetica,"SimSun"}
+#indexSide ul a {font-family: Tahoma, Geneva}
+.toolbar input.timeWid{font-family:Arial, Helvetica, "SimSun"}
+h2{font-size: 116.7%; font-weight:bold}
+#qLinks a,#cs a{font-size:12px}
+.submit button{ font-size:14px;}
+#voNav a span{padding: 0px 12px 0 10px;*padding:2px 12px 0 10px;}
+#indexMain .wa .cent th{width: 70px; }
+.tabList th{font-size:12px}
+.telStepCn{background:url(/images/400_step_cn.gif);padding:58px 0 0 432px}
+#content .gray{font-size:12px;margin-left:0}
+#popGroup ul li{font-family:Arial, Helvetica, "SimSun"}
+.temSelect .submit button{width:110px}
+.asyncUploader{ width:109px; height:33px; display: inline}
+.picContr .asyncUploader {width:58px;height:22px;overflow:hidden;float:left;}
+.picContr a{padding-top:1px;> padding-top:2px}
+.tabMore span{padding-left:36px;*padding-left:54px;}
+#content .tabMore .gray{padding:0;margin-left:5px}
+#property,#MarketTable{padding-left:117px;>padding-left:135px;}
+#indexSide .noticeSlideDown{background:url(/images/more.gif) no-repeat right;}
+#indexSide .noticeSlideUp{background:url(/images/less.gif) no-repeat right;}
+

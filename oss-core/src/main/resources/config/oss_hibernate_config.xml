@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.cglib.use_reflection_optimizer">true</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.ExtendedMySQLDialect</property>
+		<!--<property name="hibernate.default_schema">cief_n</property>-->
+		<property name="show_sql">false</property>
+		<property name="format_sql">false</property>
+		<!-- start -->
+		<mapping resource="com/focustech/oss2008/model/OssAdminUser.hbm.xml" />
+		<mapping resource="com/focustech/oss2008/model/OssAdminRole.hbm.xml" />
+		<mapping resource="com/focustech/oss2008/model/OssAdminResource.hbm.xml" />
+		<mapping resource="com/focustech/oss2008/model/OssAdminDepartment.hbm.xml" />
+		<mapping resource="com/focustech/oss2008/model/OssAdminParameter.hbm.xml" />
+		<mapping resource="com/focustech/oss2008/model/OssAdminProxyUser.hbm.xml" />
+		<mapping resource="com/focustech/oss2008/model/RoleResource.hbm.xml" />
+		<mapping resource="com/focustech/oss2008/model/OssAdminLoginControl.hbm.xml" />
+		<mapping resource="com/focustech/oss2008/model/OssAdminLoginLog.hbm.xml" />
+		<mapping resource="com/focustech/oss2008/model/RoleModel.hbm.xml" />
+		<mapping resource="com/focustech/oss2008/model/OssAdminBulletin.hbm.xml" />
+        <mapping resource="com/focustech/oss2008/model/OssAdminUserOainfo.hbm.xml" />
+    	<mapping resource="com/focustech/oss2008/model/OssKeywordChk.hbm.xml" />
+    	<mapping resource="com/focustech/oss2008/model/OssAdminPortlet.hbm.xml" />
+		<mapping class="com.focustech.oss2008.model.UitoolFuncDisplayInfo"/>
+		<mapping class="com.focustech.oss2008.model.UitoolListDisplayField"/>
+		<mapping class="com.focustech.oss2008.model.UitoolFuncTable"/>
+    	<!-- end -->
+		<mapping class="com.focustech.focus3d.paint.model.model.PaintModel"/>
+		<mapping class="com.focustech.focus3d.paint.color.model.PaintColor"/>
+		<mapping class="com.focustech.focus3d.paint.category.model.PaintCatgory"/>
+		<mapping class="com.focustech.focus3d.paint.product.model.PaintProduct"/>
+		
+	</session-factory>
+</hibernate-configuration>

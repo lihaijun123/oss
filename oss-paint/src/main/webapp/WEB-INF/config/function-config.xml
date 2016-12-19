@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- main config file ,this config file is required -->
+<function-config>
+	<extend-config>
+		<config-file path="WEB-INF/config/extend-configs/" />
+	</extend-config>
+	<global-sql>
+		<sql id="0">
+			<![CDATA[]]>
+		</sql>
+	</global-sql>
+	<system sysId="0000">
+		<global-sql>
+			<sql id="test" creator="">
+				<![CDATA[]]>
+			</sql>
+		</global-sql>
+		<function id="1" beanName="" dsname="datasource-name" message="func desc">
+			<execute-sql>
+				<sql id="LIST_1" creator="">
+					<![CDATA[
+SELECT * FROM (SELECT a.*,
+1.0 test_1_0,
+1.1 test_1_1,
+2.3 test_2_3,
+2.4 test_2_4,
+3.1 test_3_1,
+3.2 test_3_2,
+3.3 test_3_3,
+3.4 test_3_4,
+3.5 test_3_5,
+3.6 test_3_6,
+3.7 test_3_7,
+3.8 test_3_8,
+3.9 test_3_9,
+3.01 test_3_10,
+3.11 test_3_11,
+3.12 test_3_12,
+1.5 test_1_5,
+1.6 test_1_6,
+
+31.0 test3_1_0,
+32.4 test3_2_4,
+31.6 test3_1_6,
+33.6 test3_3_6,
+'t_1_1' test_type_name2_a_t_1_1
+FROM UITOOL_LIST_DISPLAY_FIELD a ORDER BY DISPLAY_INDEX)a WHERE 1=1
+]]>
+				</sql>
+<sql id="CHART_1">
+					<![CDATA[
+select * from (select * from (
+SELECT FUNC_ID, DISPLAY_TEXT, DISPLAY_INDEX
+FROM UITOOL_LIST_DISPLAY_FIELD
+WHERE FUNC_ID IN (8220)
+union
+SELECT 8221 FUNC_ID , DISPLAY_TEXT, DISPLAY_INDEX
+FROM UITOOL_LIST_DISPLAY_FIELD
+WHERE FUNC_ID IN (8220)
+union
+SELECT 8222 FUNC_ID , DISPLAY_TEXT, DISPLAY_INDEX
+FROM UITOOL_LIST_DISPLAY_FIELD
+WHERE FUNC_ID IN (8220)
+union
+SELECT 8223 FUNC_ID , DISPLAY_TEXT, DISPLAY_INDEX
+FROM UITOOL_LIST_DISPLAY_FIELD
+WHERE FUNC_ID IN (8220)
+)a
+ORDER BY FUNC_ID, DISPLAY_INDEX
+)a where 1=1
+#ORDER_SQL#
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="LIST_1" loop="false" sqlType="select" argGroup="0" selectType="get" executer="">
+				<params id="" errMsg="取列表信息出錯。">
+					<param id="id" value="" />
+				</params>
+			</func-sql>
+			<chart sqlId="CHART_1">
+				<subchart id="1">
+					<properties>
+						<property id="title" value="日增長分析"/>
+						<property id="width" value="700" />
+						<property id="type" value="2" />
+						<property id="labelsVisible" value="false" />
+						<property id="baseShapesVisible" value="true" />
+					</properties>
+					<xdim id="FUNC_ID" />
+					<ydim id="" />
+					<datadim id="DISPLAY_INDEX" title="DISPLAY_TEXT" />
+				</subchart>
+				<subchart id="2">
+					<properties>
+						<property id="title" value="日增長分析2"/>
+						<property id="width" value="700" />
+						<property id="type" value="1" />
+						<property id="labelsVisible" value="false" />
+						<property id="baseShapesVisible" value="true" />
+					</properties>
+					<xdim id="FUNC_ID" />
+					<ydim id="" />
+					<datadim id="DISPLAY_INDEX" title="DISPLAY_TEXT" />
+				</subchart>
+			</chart>
+		</function>
+		<function id="2" beanName="">
+			<execute-sql>
+				<sql id="LIST_1">
+					<![CDATA[
+SELECT * FROM CST_CLTSVRINF
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="LIST_1" loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="添加信息出錯。"></params>
+			</func-sql>
+		</function>
+		<function id="22" beanName="">
+			<execute-sql>
+				<sql id="LIST_1">
+					<![CDATA[
+insert into UITOOL_LIST_DISPLAY_FIELD (func_id,field_name,display_text,display_index,field_event)
+values(&func_id,&field_name,&display_text,&display_index,&field_event)
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="LIST_1" loop="false" sqlType="insert" argGroup="0" executer="">
+				<params id="" errMsg="添加信息出錯。"></params>
+			</func-sql>
+		</function>
+		<function id="3" beanName="">
+			<execute-sql>
+				<sql id="view_1">
+					<![CDATA[
+select * from UITOOL_LIST_DISPLAY_FIELD where func_id=&func_id and field_name=&field_name
+]]>
+				</sql>
+				<sql id="update_1">
+					<![CDATA[
+update UITOOL_LIST_DISPLAY_FIELD  set
+display_text=&display_text,display_index=&display_index,field_event=&field_event
+where func_id=&func_id and field_name=&field_name
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="view_1" loop="false" sqlType="select" selectType="get" argGroup="0" executer="">
+				<params id="" errMsg="回顯信息出錯。"></params>
+			</func-sql>
+			<func-sql id="1" sqlId="update_1" loop="false" sqlType="update" argGroup="0" executer="">
+				<params id="" errMsg="修改信息出錯。"></params>
+			</func-sql>
+		</function>
+
+		<function id="5" beanName="" dsname="datasource-name" message="func desc">
+			<execute-sql>
+				<sql id="LIST_1">
+					<![CDATA[
+SELECT * FROM (SELECT * FROM UITOOL_LIST_DISPLAY_FIELD ORDER BY DISPLAY_INDEX)a WHERE 1=1
+]]>
+				</sql>
+				<sql id="CHART_1">
+					<![CDATA[
+select * from (
+SELECT FUNC_ID, DISPLAY_TEXT, DISPLAY_INDEX
+FROM UITOOL_LIST_DISPLAY_FIELD
+WHERE FUNC_ID IN (8220)
+union
+SELECT 8221 FUNC_ID , DISPLAY_TEXT, DISPLAY_INDEX
+FROM UITOOL_LIST_DISPLAY_FIELD
+WHERE FUNC_ID IN (8220))a
+ORDER BY FUNC_ID, DISPLAY_INDEX
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="LIST_1" loop="false" sqlType="select" argGroup="0" selectType="get" executer="">
+				<params id="" errMsg="取列表信息出錯。">
+					<param id="id" value="" />
+				</params>
+			</func-sql>
+			<chart sqlId="CHART_1">
+				<subchart id="1" lowMargin="2" upMargin="2" width="700">
+					<properties>
+						<property id="width" value="700" />
+					</properties>
+					<xdim id="FUNC_ID" />
+					<ydim id="" />
+					<datadim id="DISPLAY_INDEX" title="DISPLAY_TEXT" />
+				</subchart>
+			</chart>
+		</function>
+		<function id="200" beanName="">
+			<execute-sql>
+				<sql id="LIST_1">
+					<![CDATA[
+SELECT T.TML_NAME, T1.*
+FROM (SELECT TML_ID, TML_NAME FROM TELE_MANAGE_LOCATION WHERE PARENT_TML_ID = &TML_ID) T
+LEFT JOIN (SELECT AREA_ID TML_ID
+				 ,ETL_CYCLE_ID ST_CIRCLE
+				 ,SUM(IF(D.EDP_PROD_CLASS_ID=10, ADD_USER_NUM, IF(D.EDP_PROD_CLASS_ID=11, ADD_USER_NUM, IF(D.EDP_PROD_CLASS_ID=12, ADD_USER_NUM, 0)))) TEL_USER_2_1
+				 ,SUM(IF(D.EDP_PROD_CLASS_ID=10, REMOVE_USER_NUM, IF(D.EDP_PROD_CLASS_ID=11, REMOVE_USER_NUM, IF(D.EDP_PROD_CLASS_ID=12, REMOVE_USER_NUM, 0)))) TEL_USER_2_2
+				 ,SUM(IF(D.EDP_PROD_CLASS_ID=10
+							,FINE_ADD_USER_NUM
+							,IF(D.EDP_PROD_CLASS_ID=11
+							,FINE_ADD_USER_NUM
+							,IF(D.EDP_PROD_CLASS_ID=12
+							,FINE_ADD_USER_NUM
+							,0)))) TEL_USER_2_3
+				 ,SUM(IF(D.EDP_PROD_CLASS_ID=10, INCOME_VALUE, IF(D.EDP_PROD_CLASS_ID=11, INCOME_VALUE, IF(D.EDP_PROD_CLASS_ID=12, INCOME_VALUE, 0)))) TEL_USER_2_4
+				 ,SUM(IF(D.EDP_PROD_CLASS_ID=10
+							,ROUND_RATIO_VALUE
+							,IF(D.EDP_PROD_CLASS_ID=11
+							,ROUND_RATIO_VALUE
+							,IF(D.EDP_PROD_CLASS_ID=12
+							,ROUND_RATIO_VALUE
+							,0)))) TEL_USER_2_5
+				 ,SUM(IF(D.EDP_PROD_CLASS_ID=10, SAME_DAY_RATIO, IF(D.EDP_PROD_CLASS_ID=11, SAME_DAY_RATIO, IF(D.EDP_PROD_CLASS_ID=12, SAME_DAY_RATIO, 0)))) TEL_USER_2_6
+				 ,SUM(IF(D.EDP_PROD_CLASS_ID=10, USING_USER_NUM, IF(D.EDP_PROD_CLASS_ID=11, USING_USER_NUM, IF(D.EDP_PROD_CLASS_ID=12, USING_USER_NUM, 0)))) TEL_USER_2_7
+				 ,SUM(IF(D.EDP_PROD_CLASS_ID=10
+							,TOTAL_FINE_ADD_NUM
+							,IF(D.EDP_PROD_CLASS_ID=11
+							,TOTAL_FINE_ADD_NUM
+							,IF(D.EDP_PROD_CLASS_ID=12
+							,TOTAL_FINE_ADD_NUM
+							,0)))) TEL_USER_2_8
+				 ,SUM(IF(D.EDP_PROD_CLASS_ID=10
+							,MONTH_ACCUMULATE_INCOME
+							,IF(D.EDP_PROD_CLASS_ID=11
+							,MONTH_ACCUMULATE_INCOME
+							,IF(D.EDP_PROD_CLASS_ID=12
+							,MONTH_ACCUMULATE_INCOME
+							,0)))) TEL_USER_2_9
+				 ,SUM(IF(D.EDP_PROD_CLASS_ID=10
+							,MONTH_ACCUMULATE_INCOME
+							,IF(D.EDP_PROD_CLASS_ID=11
+							,MONTH_ACCUMULATE_INCOME
+							,IF(D.EDP_PROD_CLASS_ID=12
+							,MONTH_ACCUMULATE_INCOME
+							,0)))) TEL_USER_2_10
+				 ,SUM(IF(D.EDP_PROD_CLASS_ID=10
+							,MONTH_ACCU_ROUND_RATIO
+							,IF(D.EDP_PROD_CLASS_ID=11
+							,MONTH_ACCU_ROUND_RATIO
+							,IF(D.EDP_PROD_CLASS_ID=12
+							,MONTH_ACCU_ROUND_RATIO
+							,0)))) TEL_USER_2_11
+				 ,SUM(IF(D.EDP_PROD_CLASS_ID=10
+							,MONTH_ACCU_ROUND_RATIO
+							,IF(D.EDP_PROD_CLASS_ID=11
+							,MONTH_ACCU_ROUND_RATIO
+							,IF(D.EDP_PROD_CLASS_ID=12
+							,MONTH_ACCU_ROUND_RATIO
+							,0)))) TEL_USER_2_12
+				 ,SUM(IF(D.EDP_PROD_CLASS_ID=10, ADD_USER_NUM, IF(D.EDP_PROD_CLASS_ID=11, ADD_USER_NUM, IF(D.EDP_PROD_CLASS_ID=12, ADD_USER_NUM, 0)))) TEL_USER_2_13
+				 ,1 TEL_USER_1_5
+				 ,SUM(IF(D.EDP_PROD_CLASS_ID=13, ADD_USER_NUM, 0)) KD_USER_2_14
+				 ,SUM(IF(D.EDP_PROD_CLASS_ID=13, REMOVE_USER_NUM, 0)) KD_USER_2_15
+				 ,SUM(IF(D.EDP_PROD_CLASS_ID=13, FINE_ADD_USER_NUM, 0)) KD_USER_2_16
+				 ,SUM(IF(D.EDP_PROD_CLASS_ID=13, USING_USER_NUM, 0)) KD_USER_2_17
+				 ,SUM(IF(D.EDP_PROD_CLASS_ID=13, TOTAL_FINE_ADD_NUM, 0)) KD_USER_2_18
+		   FROM UI2_SERV_DEVELOP_DAY U, EDP_DIM_PROD D
+		   WHERE U.PROD_ID = D.EDP_PROD_ID
+		   AND U.ETL_CYCLE_ID = &ST_CIRCLE
+		   GROUP BY AREA_ID, ETL_CYCLE_ID) T1 ON T.TML_ID = T1.TML_ID
+]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="LIST_1" loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="查詢出錯。"></params>
+			</func-sql>
+		</function>
+		<function id="201" beanName="">
+			<execute-sql>
+				<sql id="LIST_1">
+					<![CDATA[select * from dual]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="LIST_1" loop="false" sqlType="select" argGroup="0" executer="">
+				<params id="" errMsg="查詢出錯。"></params>
+			</func-sql>
+		</function>
+		<function id="100" beanName="" dsname="datasource-name" message="func desc">
+			<execute-sql>
+				<sql id="LIST_1">
+					<![CDATA[
+select 'field1' field1,
+			 'field2_1_0' field2_1_0,
+			 'field2_1_1' field2_1_1,
+			 'field2_1_2' field2_1_2,
+			 'field2_2_0' field2_2_0,
+			 'field2_2_1' field2_2_1,
+			 'field2_2_2' field2_2_2,
+			 'field2_2_3' field2_2_3
+        ]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="LIST_1" loop="false" sqlType="select" argGroup="0" selectType="get" executer="">
+				<params id="0" errMsg="取列表信息出錯。">
+					<param id="id" value="" />
+				</params>
+			</func-sql>
+		</function>
+		<function id="600" beanName="" dsname="" message="">
+			<execute-sql>
+				<sql id="LIST_1">
+					<![CDATA[
+select 1 dim_field1_1_0,'地' dim_field1_1_1, 100 dim_field1_2_1 , 110 dim_field1_1_2
+union all
+select 2 dim_field1_1_0,'地' dim_field1_1_1, 200 dim_field1_2_1 , 210 dim_field1_1_2
+union all
+select 3 dim_field1_1_0,'地' dim_field1_1_1, 300 dim_field1_2_1 , 310 dim_field1_1_2
+        ]]>
+				</sql>
+			</execute-sql>
+			<func-sql id="1" sqlId="LIST_1" loop="false" sqlType="select" argGroup="0" selectType="get" executer="">
+				<params id="0" errMsg="取列表信息出錯。">
+					<param id="id" value="" />
+				</params>
+			</func-sql>
+			<chart sqlId="LIST_1">
+				<subchart id="1">
+					<properties>
+						<property id="width" value="600" />
+						<property id="height" value="350" />
+					</properties>
+					<xdim id="DIM_FIELD1_1_0" />
+					<ydim id="DIM_FIELD1_1_1" />
+					<datadim id="DIM_FIELD1_2_1" title="詳單收入" />
+					<datadim id="DIM_FIELD1_1_2" title="電話用戶到達數" />
+				</subchart>
+			</chart>
+		</function>
+	</system>
+</function-config>

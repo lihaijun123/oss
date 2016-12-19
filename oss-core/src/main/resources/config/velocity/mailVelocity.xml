@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<velocities>
+    <velocity id="velocity1" location="/mailtpl/hello.vm">
+        <senderAddress>notification@ve.cn</senderAddress>
+        <senderDispaly>made-in-china</senderDispaly>
+        <replyTo>spring111@163.com</replyTo>
+        <subject>taofucheng demo</subject>
+    </velocity>
+	<velocity id="stationMsgMailRemind" location="/site_message_remind.vm">
+		 <senderAddress>notification@cief.com</senderAddress>
+	     <senderDispaly>江苏工业数字虚拟展览馆</senderDispaly>
+	     <subject>联系信邮件提醒</subject>
+	</velocity>
+	<velocity id="RealNameAuthMailRemind" location="/real_name_auth_reminder_template.vm">
+		 <senderAddress>notification@cief.com</senderAddress>
+	     <senderDispaly>江苏工业数字虚拟展览馆</senderDispaly>
+	     <subject>实名认证提醒</subject>
+	</velocity>
+	<velocity id="RealNameAuthExpireRemind" location="/real_name_auth_expire_reminding.vm">
+		 <senderAddress>notification@cief.com</senderAddress>
+	     <senderDispaly>江苏工业数字虚拟展览馆</senderDispaly>
+	     <subject>实名认证提醒</subject>
+	</velocity>
+	<velocity id="userEmailChangeReminder" location="/user_email_change_reminder_template.vm">
+		 <senderAddress>notification@cief.com</senderAddress>
+	     <senderDispaly>江苏工业数字虚拟展览馆</senderDispaly>
+	     <subject>登录名（新邮箱）修改提醒</subject>
+	</velocity>
+</velocities>

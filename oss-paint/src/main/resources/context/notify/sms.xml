@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:context="http://www.springframework.org/schema/context"
+     xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context-3.0.xsd
+         http://www.springframework.org/schema/aspect
+         http://www.springframework.org/schema/context/spring-aspect-3.0.xsd
+         http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/context/spring-aop-3.0.xsd">
+
+	<!-- 发送短信配置 -->
+	<bean id="smsClient" class="com.focustech.focus3d.bundle.sms.client.SmsClient">
+		<property name="userName" value="${sms.username}" />
+		<property name="passWord"  value="${sms.password}" />
+		<property name="serviceCode" value="${sms.servicecode}" />
+		<property name="serviceCodeExt" value="${sms.sercicecode.ext}" />
+		<property name="messageId" value="${sms.message.id}" />
+	</bean>
+
+	<bean class="com.focustech.focus3d.common.sms.service.impl.SmsServiceImpl">
+		<property name="focus3dMobileList" value="${tcr.inner.sms.mobile.list}" />
+		<property name="smsClient" ref="smsClient" />
+	</bean>
+</beans>

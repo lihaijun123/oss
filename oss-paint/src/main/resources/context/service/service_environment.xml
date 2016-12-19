@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    <bean id="environmentParameterImpl" class="com.focustech.oss2008.service.impl.EnvironmentParameterImpl"
+        lazy-init="true">
+        <property name="envParam">
+            <map>
+                <entry key="SAL" value="http://oss.3d-focus.com/" />
+                <entry key="SAL_NAME" value="销售系统" />
+                <!--  -->
+                <!--  -->
+                <entry key="DOMAIN" value="3d-focus.com" />
+                <entry key="CURRENT_MODEL" value="SAL" />
+                <entry key="USE_SSO" value="false" />
+                <!-- 加密參數 -->
+                <entry key="EncryptHandler" value="com.focustech.utils.encrypt.MIC2005EncryptHandler2" />
+                <entry key="EncryptPosMap" value="0,1,2,3,4,5,6,7,8,9,10,11" />
+                <entry key="EncryptWheelMap" value="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" />
+                <entry key="EncryptPosMap4Image" value="0,1,2,3,4,5,6,7,8,9,10,11" />
+                <entry key="EncryptWheelMap4Image" value="ABCDEFGHIJKLMNOPQRSTUVWYZabcdefghijklmnopqrstuvwyz" />
+                <entry key="UnEncryptMinLen" value="1" />
+                <entry key="UnEncryptMaxLen" value="10" />
+                <entry key="EncryptLen" value="12" />
+                <!-- 客戶撞單檢查參數配置 -->
+                <!-- 手動操作（頁面中添加/修改客戶或聯系人）時的撞單檢查的開關 -->
+                <entry key="isManualNeedCheck" value="true" />
+                <!-- 自動操作（如公司審核等數據進入銷售系統時的操作）時的撞單檢查的開關 -->
+                <entry key="isAutoNeedCheck" value="true" />
+                <entry key="check_customer_crash_server_url" value="http://crash.wenbi.com" />
+                <entry key="checkCrashErrorMessageMailTo" value="taofucheng@made-in-china.com,hexuey@made-in-china.com" />
+                <!-- 單位秒，不填寫或填寫錯誤默認不限制 -->
+                <entry key="sendCrashErrorMessageMailInteval" value="600" />
+                <!-- 單位︰秒 -->
+                <entry key="crashCheckReadTimeOut" value="10" />
+                <!-- 自動導入外部數據時，一次取到List中的數據的數量 -->
+                <entry key="not_import_account_clue_cluster" value="100" />
+                <entry key="autoImportErrorMessageMailTo" value="taofucheng@made-in-china.com,hexuey@made-in-china.com" />
+                <!-- 客戶信息修改控制開關  -->
+                <entry key="isForbidModify" value="false" />
+                <!-- 驗證碼開關︰true是開；false是關。如果填寫的不是布爾型，則認為是false -->
+                <entry key="needCheckValidateNumber" value="false" />
+                <!-- qp詞類型ID -->
+                <entry key="qp_pdty_id" value="1560,1565,1568" />
+                <!-- 專題類型ID -->
+                <entry key="sub_ty_id" value="1572" />
+                <!-- 動態密碼相關的參數 -->
+                <entry key="needCheckDynPassword" value="false" />
+                <!-- 銷售系統中所有用戶對應的應用域 -->
+                <entry key="dynPasswordUsersHaveDomains" value="windows,micagents" />
+                <!-- new order -->
+                <!-- 領動發送郵件︰修改密碼模版對應 -->
+                <entry key="email_model_changePwd_sid" value="4" />
+                <!-- 領動發送郵件︰開通服務模版對應 -->
+                <entry key="email_model_publish_website" value="6" />
+                <!-- 領動發送郵件︰修改服務模版對應 -->
+                <entry key="email_model_modify_publish_website" value="5" />
+                <!-- 領動發送郵件︰開通續約服務模版對應 -->
+                <entry key="email_model_releted_publish_website" value="7" />
+                <!-- 是否檢查用戶的內、外網使用 -->
+                <entry key="CHECK_IP" value="false" />
+                <!-- 書面合同最大編號-->
+                <entry key="w_con_id" value="MIC0840001" />
+            </map>
+        </property>
+    </bean>
+</beans>

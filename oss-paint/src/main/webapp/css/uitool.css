@@ -1,0 +1,30 @@
+body { font-size: 12px; color: #000000; font-family: "verdana", "宋体"; margin:0px; SCROLLBAR-FACE-COLOR: #CFE2FC; SCROLLBAR-HIGHLIGHT-COLOR: #fcfcfc; SCROLLBAR-3DLIGHT-COLOR: #7eabf7; SCROLLBAR-ARROW-COLOR: #2F5FAE; SCROLLBAR-TRACK-COLOR: #e3f0ff; SCROLLBAR-DARKSHADOW-COLOR: #CEE1FD; border:1px solid #C4D7FF; background-color:#f4f8ff; }
+body table { width:100% }
+td,th{ font-size: 12px; color: #000000; font-family: "verdana", "宋体"; }
+a:link { color: #000000; text-decoration: underline }
+a:visited { color: #000000; text-decoration: underline }
+a:active { text-decoration: none }
+a:hover { text-decoration:underline; }
+input { height:20px; padding:1px;border-top-width: 1px; border-left-width: 1px; border-left-color: #cccccc; border-bottom-width: 1px; border-bottom-color: #cccccc; border-top-color: #cccccc; border-right-width: 1px; border-right-color: #cccccc }
+/* operCtrl.jsp */
+.strText { width:80%; }
+.noStrText { size:10; }
+.extendText { border:1px solid #C4D7FF; overflow:auto; width:80%; height:50px; layout-grid:line strict auto auto; text-decoration:underline; }
+.title { border-bottom:1px solid #bdd7f7; padding-left:5px; padding-right:5px; border-left:1px solid #ffffff; border-top:1px solid #e0edfc; vertical-align:middle; border-right:1px solid #95bff2; background: #cee1f9 url(/images/butico.gif) repeat-x 0px -468px; }
+#id_list_title { border-bottom:1px solid #bdd7f7; padding-left:5px; padding-right:5px; border-left:1px solid #ffffff; border-top:1px solid #e0edfc; vertical-align:middle; border-right:1px solid #95bff2; background: #cee1f9 url(/images/butico.gif) repeat-x 0px -468px; font-weight:bold }
+#tr_title, #tr_title td { }
+#list00_rectable { text-align: center; }
+#list00_table { background-color:#EDEDED; border:1px solid #C4D7FF; background-color:#ccc; }
+#searchTr table, tr { border: 0px; background-color: #ffffff; background-color:#f4f8ff; }
+.odd { height: 25px; background-color:#ffffff; }
+.even { background-color:#FAFAFA; height: 25px; }
+.red { height: 25px; background-color:#FFCCCC; }
+.f_field_rang_s, .f_field_rang_e { width:80px; }
+.likeInput { background: transparent url(/images/like.gif) repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; }
+.searchTab { table-layout: fixed; width:auto }
+.searchTab th{ font-weight:normal; width:120px; text-align:right}
+.searchTab td { overflow: hidden;padding:4px}
+.bg-gray { background-color:#EEEEED; }
+.bg-red { color: #FF0000; }
+.orderTr td{ padding:5px 10px; line-height:1.8}
+.submitc, .submitc:focus { font-size: 12px; height: 24px; background: transparent url(/images/fade-butt1.png) repeat scroll 0% 0%; border-color: #AAC5E3 rgb(96, 146, 202) rgb(96, 146, 202)  rgb(170, 197, 227); border-style: double; border-width: 1px; width:60px; line-height:24px; cursor:pointer; color:#376bb6; font-weight:bold }

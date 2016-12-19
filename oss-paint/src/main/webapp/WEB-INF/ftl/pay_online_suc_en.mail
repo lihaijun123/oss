@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>~!title!~</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<STYLE TYPE="text/css">
+<!--
+A {COLOR: #000070; TEXT-DECORATION: underline}
+A:hover {COLOR: #ef7500; TEXT-DECORATION: underline}
+A:active {COLOR: #ef7500; TEXT-DECORATION: underline}
+td{font-size:9pt;font-family:verdana,arial}
+body {font-size:9pt;font-family:verdana,arial}
+p{font-size:9pt;font-family:verdana,arial}
+-->
+</STYLE>
+</head>
+<body>
+<p>Dear ${sender_name},</p>
+<p>Congratulations! You have successfully purchased ${prod_num} Audit Report(s) by paying ${gross}.</p>
+<br>
+<br>
+<#list lst as sgs>
+  <p>Company: ${sgs.comName} , SGS Serial NO.: ${sgs.reportId}</p>
+</#list>
+<br>
+<br>
+<p>If you are a registered memeber of Made-in-China.com, please Login to check your payment record in Virtual Office.</p>
+<p>We will send the Audit Report to  your email:<b> ${pay_email}</b>,  please check it later.</p>
+<b>Order Details</b><br>
+--------------------------------------------------------------------------------- <br>
+<b>Order Number:</b> ${item_number}<br>
+<b>Service Name:</b> ${server_name}<br>
+<b>SGS Serial NO.:</b> ${report_No}<br>
+<b>Price of Service:</b> ${price}<br><br>
+<br>
+<br>
+<b>Contact Details</b><br>
+--------------------------------------------------------------------------------- <br>
+ ${company_name}
+${pay_name}
+<b>Your Email:</b> ${pay_email}<br>
+${pay_phone}
+${pay_country}
+<p>If you have any questions on how to  get or view Audit Report, please <a href="http://www.made-in-china.com/audited-suppliers/for-buyers/download-reports.html">click  here</a> to know more or <a href="http://www.made-in-china.com/sgscontact.do?xcase=report_index">contact us</a> directly.</p>
+<br>
+<p>Best Regards,</p>
+<p>
+Made-in-China.com<br>
+<a href="http://www.made-in-china.com">http://www.made-in-china.com</a><br>
+<a href="mailto:auditreports@made-in-china.com">auditreports@made-in-china.com</a>
+</p>
+</body>
+</html>

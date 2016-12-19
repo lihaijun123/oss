@@ -1,0 +1,19 @@
+.businessScope label{
+    width: 130px;
+    display: inline-block
+}
+.imgBox{
+	border:1px solid #DFDFDF;
+	float:left;
+	margin:0 5px 5px 0;
+	padding:1px;
+	position:relative;
+	height:100px;
+	text-align:center;
+	vertical-align:middle;
+	width:100px;
+	}
+.upBox{
+	position:absolute;
+	right:4px
+	}

@@ -1,0 +1,8 @@
+# created by Yongzhong Xie
+# Do not delete this file ! Please contact xyz@made-in-china.com
+# <URL:http://www.robotstxt.org/wc/exclusion.html#robotstxt>
+# Format is:
+#       User-agent: <name of spider>
+#       Disallow: <nothing> | <path>
+User-agent: *
+disallow: /
