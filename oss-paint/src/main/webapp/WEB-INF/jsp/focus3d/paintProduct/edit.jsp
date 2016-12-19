@@ -12,6 +12,7 @@
 <title></title>
 <link rel="stylesheet" type="text/css" href="/css/oss.css" />
 <link rel="stylesheet" type="text/css" href="/css/pop.css" />
+
 </head>
 <body>
 <form:form modelAttribute="paintProduct" action="/paintProduct.do" method="post">
@@ -89,11 +90,16 @@
 <script type="text/javascript" src="/extjs/ext-all.js"></script>
 <!-- Ext Js Lib End -->
 <!-- User Defined Js Start -->
+<script src="/js/bootstrap.minn-3.3.5.js"></script>
 <script src="extjs/validate_form.js" type="text/javascript"></script>
 <script type="text/javascript" src="/js/util.js"></script>
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/calendar.js"></script>
+<script type="text/javascript" src="/js/footer.js"></script>
 <%@include file="/WEB-INF/jsp/common/uploadfile.jsp" %>
 <script src="/js/ImageEditor/imageEditor.js"></script>
 <script src="/js/focus3d/paintProduct/fileupload.js"></script>
+<div id="footer">
+	<span><h1>${message }</h1></span>
+</div>
 </html>

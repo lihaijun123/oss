@@ -82,6 +82,10 @@
 <script type="text/javascript" src="/js/util.js"></script>
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/calendar.js"></script>
+<script type="text/javascript" src="/js/footer.js"></script>
 <%@include file="/WEB-INF/jsp/common/uploadfile.jsp" %>
 <script src="/js/focus3d/paintModel/fileupload.js"></script>
+<div id="footer">
+	<span><h1>${message }</h1></span>
+</div>
 </html>

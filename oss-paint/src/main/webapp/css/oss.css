@@ -52,3 +52,25 @@ small { color:#999999; font-size:12px; font-weight:normal; }
 #prodTypes .cur{text-decoration:none;background:#d8e2f2}
 #prodTypes a{margin-left:3px;display:inline-block;width:15px;height:15px;cursor:pointer;position:absolute;right:5px;top:6px}
 /*会议信息修改页面中的参展人员修改 end*/
+/*add by lhj*/
+#footer {  
+	position: absolute;  
+	bottom: 0;  
+	padding: 10px 0;  
+	background-color: #AAA;  
+	width: 100%;  
+	background: #8db2e3;
+	width: 100%;
+	line-height:30px;
+	height: 30px;
+	margin-top: 10px;
+	text-align: center;
+	display: none;
+	
+}  
+#footer h1 {  
+	font: 20px/2 Arial;  
+	margin:0;  
+	padding:0 10px;  
+	color: green;
+}  

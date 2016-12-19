@@ -6,6 +6,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.validation.BindingResult;
+
+import com.focustech.extend.spring.argresolver.RedirectAttributes;
 import com.focustech.focus3d.paint.category.model.PaintCatgory;
 import com.focustech.focus3d.paint.category.service.PaintCatgoryService;
 /**
@@ -38,13 +40,13 @@ public class PaintCatgoryController extends AbstractController{
 	 * @return
 	 */
 	@RequestMapping(params = "method=create", method = RequestMethod.POST)
-	public String create(PaintCatgory paintCatgory, BindingResult result,ModelMap modelMap){
+	public String create(PaintCatgory paintCatgory, BindingResult result,ModelMap modelMap, RedirectAttributes redirectAttributes){
         if (result.hasErrors()) {
         	return "/focus3d/paintCatgory/new";
         }
         paintCatgoryService.insertOrUpdate(paintCatgory);
-        modelMap.addAttribute("paintCatgory", paintCatgory);
-        return "/focus3d/paintCatgory/edit";
+        redirectAttributes.addFlashAttribute("保存成功");
+        return redirectTo("/paintCatgory.do?method=edit&sn=" + paintCatgory.getSn());
 	}
 	/**
 	 *
@@ -67,13 +69,13 @@ public class PaintCatgoryController extends AbstractController{
 	 * @return
 	 */
 	@RequestMapping(params = "method=edit", method = RequestMethod.POST)
-	public String edit(PaintCatgory paintCatgory, BindingResult result,ModelMap modelMap){
+	public String edit(PaintCatgory paintCatgory, BindingResult result,ModelMap modelMap, RedirectAttributes redirectAttributes){
         if (result.hasErrors()) {
         	return "/focus3d/paintCatgory/edit";
         }
         paintCatgoryService.insertOrUpdate(paintCatgory);
-        modelMap.addAttribute("paintCatgory", paintCatgory);
-        return "/focus3d/paintCatgory/edit";
+        redirectAttributes.addFlashAttribute("保存成功");
+        return redirectTo("/paintCatgory.do?method=edit&sn=" + paintCatgory.getSn());
 	}
 	/**
 	 *

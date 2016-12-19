@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.focustech.extend.spring.argresolver.RedirectAttributes;
 import com.focustech.focus3d.paint.category.model.PaintCatgory;
 import com.focustech.focus3d.paint.category.service.PaintCatgoryService;
 import com.focustech.focus3d.paint.color.model.PaintColor;
@@ -58,13 +59,13 @@ public class PaintProductController extends AbstractController{
 	 * @return
 	 */
 	@RequestMapping(params = "method=create", method = RequestMethod.POST)
-	public String create(PaintProduct paintProduct, BindingResult result,ModelMap modelMap){
+	public String create(PaintProduct paintProduct, BindingResult result,ModelMap modelMap, RedirectAttributes redirectAttributes){
         if (result.hasErrors()) {
         	return "/focus3d/paintProduct/new";
         }
         paintProductService.insertOrUpdate(paintProduct);
-        modelMap.addAttribute("paintProduct", paintProduct);
-        return "/focus3d/paintProduct/edit";
+        redirectAttributes.addFlashAttribute("保存成功");
+        return redirectTo("/paintProduct.do?method=edit&sn=" + paintProduct.getSn());
 	}
 	/**
 	 *
@@ -87,13 +88,13 @@ public class PaintProductController extends AbstractController{
 	 * @return
 	 */
 	@RequestMapping(params = "method=edit", method = RequestMethod.POST)
-	public String edit(PaintProduct paintProduct, BindingResult result,ModelMap modelMap){
+	public String edit(PaintProduct paintProduct, BindingResult result,ModelMap modelMap, RedirectAttributes redirectAttributes){
         if (result.hasErrors()) {
         	return "/focus3d/paintProduct/edit";
         }
         paintProductService.insertOrUpdate(paintProduct);
-        modelMap.addAttribute("paintProduct", paintProduct);
-        return "/focus3d/paintProduct/edit";
+        redirectAttributes.addFlashAttribute("保存成功");
+        return redirectTo("/paintProduct.do?method=edit&sn=" + paintProduct.getSn());
 	}
 	/**
 	 *

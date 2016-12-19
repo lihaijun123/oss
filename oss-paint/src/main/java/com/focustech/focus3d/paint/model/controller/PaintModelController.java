@@ -1,13 +1,15 @@
 package com.focustech.focus3d.paint.model.controller;
-import com.focustech.oss2008.web.AbstractController;
-import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.validation.BindingResult;
+
+import com.focustech.extend.spring.argresolver.RedirectAttributes;
 import com.focustech.focus3d.paint.model.model.PaintModel;
 import com.focustech.focus3d.paint.model.service.PaintModelService;
+import com.focustech.oss2008.web.AbstractController;
 /**
  *
  * *
@@ -38,13 +40,13 @@ public class PaintModelController extends AbstractController{
 	 * @return
 	 */
 	@RequestMapping(params = "method=create", method = RequestMethod.POST)
-	public String create(PaintModel paintModel, BindingResult result,ModelMap modelMap){
+	public String create(PaintModel paintModel, BindingResult result,ModelMap modelMap, RedirectAttributes redirectAttributes){
         if (result.hasErrors()) {
         	return "/focus3d/paintModel/new";
         }
         paintModelService.insertOrUpdate(paintModel);
-        modelMap.addAttribute("paintModel", paintModel);
-        return "/focus3d/paintModel/edit";
+    	redirectAttributes.addFlashAttribute("保存成功");
+    	return redirectTo("/paintModel.do?method=edit&sn=" + paintModel.getSn());
 	}
 	/**
 	 *
@@ -67,13 +69,13 @@ public class PaintModelController extends AbstractController{
 	 * @return
 	 */
 	@RequestMapping(params = "method=edit", method = RequestMethod.POST)
-	public String edit(PaintModel paintModel, BindingResult result,ModelMap modelMap){
+	public String edit(PaintModel paintModel, BindingResult result,ModelMap modelMap, RedirectAttributes redirectAttributes){
         if (result.hasErrors()) {
         	return "/focus3d/paintModel/edit";
         }
         paintModelService.insertOrUpdate(paintModel);
-        modelMap.addAttribute("paintModel", paintModel);
-        return "/focus3d/paintModel/edit";
+        redirectAttributes.addFlashAttribute("保存成功");
+    	return redirectTo("/paintModel.do?method=edit&sn=" + paintModel.getSn());
 	}
 	/**
 	 *

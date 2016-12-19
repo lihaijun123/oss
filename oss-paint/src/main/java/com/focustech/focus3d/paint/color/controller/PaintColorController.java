@@ -6,6 +6,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.validation.BindingResult;
+
+import com.focustech.extend.spring.argresolver.RedirectAttributes;
 import com.focustech.focus3d.paint.color.model.PaintColor;
 import com.focustech.focus3d.paint.color.service.PaintColorService;
 /**
@@ -38,13 +40,13 @@ public class PaintColorController extends AbstractController{
 	 * @return
 	 */
 	@RequestMapping(params = "method=create", method = RequestMethod.POST)
-	public String create(PaintColor paintColor, BindingResult result,ModelMap modelMap){
+	public String create(PaintColor paintColor, BindingResult result,ModelMap modelMap, RedirectAttributes redirectAttributes){
         if (result.hasErrors()) {
         	return "/focus3d/paintColor/new";
         }
         paintColorService.insertOrUpdate(paintColor);
-        modelMap.addAttribute("paintColor", paintColor);
-        return "/focus3d/paintColor/edit";
+        redirectAttributes.addFlashAttribute("保存成功");
+        return redirectTo("/paintColor.do?method=edit&sn=" + paintColor.getSn());
 	}
 	/**
 	 *
@@ -67,13 +69,13 @@ public class PaintColorController extends AbstractController{
 	 * @return
 	 */
 	@RequestMapping(params = "method=edit", method = RequestMethod.POST)
-	public String edit(PaintColor paintColor, BindingResult result,ModelMap modelMap){
+	public String edit(PaintColor paintColor, BindingResult result,ModelMap modelMap, RedirectAttributes redirectAttributes){
         if (result.hasErrors()) {
         	return "/focus3d/paintColor/edit";
         }
         paintColorService.insertOrUpdate(paintColor);
-        modelMap.addAttribute("paintColor", paintColor);
-        return "/focus3d/paintColor/edit";
+        redirectAttributes.addFlashAttribute("保存成功");
+        return redirectTo("/paintColor.do?method=edit&sn=" + paintColor.getSn());
 	}
 	/**
 	 *
@@ -85,7 +87,7 @@ public class PaintColorController extends AbstractController{
 	@RequestMapping(params = "method=delete", method = RequestMethod.GET)
 	public String delete(Long sn, ModelMap modelMap){
 		paintColorService.delete(sn);
-		return redirectTo("/uitoolList.ui?funcID=1080331");
+		return redirectTo("/uitoolList.ui?funcID=1080330");
 	}
 
 }
