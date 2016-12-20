@@ -21,6 +21,17 @@
 	<table width="100%">
 		<caption class="x-panel-header"></caption>
 		<tr>
+			<th><font color="red">*</font>类型:</th>
+			<td >
+				<f:complex name="modelType" 
+						   type="select" 
+						   paramType="MODEL_TYPE"
+						   siteType="1"
+						   defaultValue="${paintModel.modelType}"
+						   />
+			</td>
+		</tr>
+		<tr>
 			<th><font color="red">*</font>名称:</th>
 			<td ><form:input path="name"/></td>
 		</tr>
@@ -30,24 +41,6 @@
 				<f:img id="picFileSn_img" hid="picFileSn" hname="picFileSn" width="120" height="120" src="${paintModel.picFileSn}" /><br>
 				<input id="file_upload1" name="file_upload1" type="file" /><br>
 				<form:errors path="picFileSn" cssClass="errors" />
-			</td>
-		</tr>
-		<tr>
-			<th><font color="red">*</font>模型文件:</th>
-			<td >
-				<input id="file_upload2" name="file_upload2" type="file" /><br>
-				<f:fileInfo hid="modelFileSn" hname="modelFileSn" value="${paintModel.modelFileSn }"/>
-			</td>
-		</tr>
-		<tr>
-			<th><font color="red">*</font>模型类型:</th>
-			<td >
-				<f:complex name="modelType" 
-						   type="select" 
-						   paramType="MODEL_TYPE"
-						   siteType="1"
-						   defaultValue="${paintModel.modelType}"
-						   />
 			</td>
 		</tr>
 		<tr>
@@ -62,7 +55,13 @@
 			
 			</td>
 		</tr>
-				
+		<tr>
+			<th><font color="red">*</font>模型文件:</th>
+			<td >
+				<input id="file_upload2" name="file_upload2" type="file" /><br>
+				<f:fileInfo hid="modelFileSn" hname="modelFileSn" value="${paintModel.modelFileSn }"/>
+			</td>
+		</tr>
 			</table>
 	<div class="buttons">
 		<input type="submit"  class="submitc" value="保存"/>
@@ -80,11 +79,14 @@
 <!-- User Defined Js Start -->
 <script src="extjs/validate_form.js" type="text/javascript"></script>
 <script type="text/javascript" src="/js/util.js"></script>
-<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/jquery.validate.extend.js"></script>
 <script type="text/javascript" src="/js/calendar.js"></script>
 <script type="text/javascript" src="/js/footer.js"></script>
 <%@include file="/WEB-INF/jsp/common/uploadfile.jsp" %>
 <script src="/js/focus3d/paintModel/fileupload.js"></script>
+<script src="/js/focus3d/paintModel/validate.js"></script>
 <div id="footer">
 	<span><h1>${message }</h1></span>
 </div>

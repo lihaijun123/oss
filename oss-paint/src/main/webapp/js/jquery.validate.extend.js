@@ -1,4 +1,4 @@
-
+$.extend($.validator.defaults,{ignore:""});
 //验证密码
 jQuery.validator.addMethod("isPwd", function(value, element){
 		return this.optional(element) || /^[a-zA-Z]\w{5,20}$/.test(value);

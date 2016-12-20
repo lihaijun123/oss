@@ -40,8 +40,11 @@
 <!-- User Defined Js Start -->
 <script src="extjs/validate_form.js" type="text/javascript"></script>
 <script type="text/javascript" src="/js/util.js"></script>
-<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/jquery.validate.extend.js"></script>
 <script type="text/javascript" src="/js/calendar.js"></script>
 <%@include file="/WEB-INF/jsp/common/uploadfile.jsp" %>
 <script src="/js/ImageEditor/imageEditor.js"></script>
+<script src="/js/focus3d/paintCatgory/validate.js"></script>
 </html>

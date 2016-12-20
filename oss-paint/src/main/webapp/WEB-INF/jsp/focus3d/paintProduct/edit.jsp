@@ -93,12 +93,15 @@
 <script src="/js/bootstrap.minn-3.3.5.js"></script>
 <script src="extjs/validate_form.js" type="text/javascript"></script>
 <script type="text/javascript" src="/js/util.js"></script>
-<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/jquery.validate.extend.js"></script>
 <script type="text/javascript" src="/js/calendar.js"></script>
 <script type="text/javascript" src="/js/footer.js"></script>
 <%@include file="/WEB-INF/jsp/common/uploadfile.jsp" %>
 <script src="/js/ImageEditor/imageEditor.js"></script>
 <script src="/js/focus3d/paintProduct/fileupload.js"></script>
+<script src="/js/focus3d/paintProduct/validate.js"></script>
 <div id="footer">
 	<span><h1>${message }</h1></span>
 </div>
