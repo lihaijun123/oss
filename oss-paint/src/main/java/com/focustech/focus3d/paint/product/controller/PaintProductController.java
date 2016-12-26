@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.focustech.common.utils.TCUtil;
 import com.focustech.extend.spring.argresolver.RedirectAttributes;
 import com.focustech.focus3d.paint.category.model.PaintCatgory;
 import com.focustech.focus3d.paint.category.service.PaintCatgoryService;
 import com.focustech.focus3d.paint.color.model.PaintColor;
 import com.focustech.focus3d.paint.color.service.PaintColorService;
+import com.focustech.focus3d.paint.model.model.PaintModel;
 import com.focustech.focus3d.paint.product.model.PaintProduct;
 import com.focustech.focus3d.paint.product.service.PaintProductService;
 import com.focustech.oss2008.web.AbstractController;
@@ -63,6 +65,7 @@ public class PaintProductController extends AbstractController{
         if (result.hasErrors()) {
         	return "/focus3d/paintProduct/new";
         }
+        paintProduct.setVersionNum(1);
         paintProductService.insertOrUpdate(paintProduct);
         redirectAttributes.addFlashAttribute("保存成功");
         return redirectTo("/paintProduct.do?method=edit&sn=" + paintProduct.getSn());
@@ -92,7 +95,13 @@ public class PaintProductController extends AbstractController{
         if (result.hasErrors()) {
         	return "/focus3d/paintProduct/edit";
         }
-        paintProductService.insertOrUpdate(paintProduct);
+        PaintProduct dbObj = paintProductService.select(paintProduct.getSn());
+        paintProduct.setVersionNum(dbObj.getVersionNum());
+		if(dbObj.getModelFileSn() != null && !dbObj.getModelFileSn().equals(paintProduct.getModelFileSn())){
+			Integer version = TCUtil.iv(paintProduct.getVersionNum());
+			paintProduct.setVersionNum(++ version);
+		}
+        paintProductService.update(paintProduct);
         redirectAttributes.addFlashAttribute("保存成功");
         return redirectTo("/paintProduct.do?method=edit&sn=" + paintProduct.getSn());
 	}

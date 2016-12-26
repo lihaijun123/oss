@@ -1,11 +1,11 @@
 package com.focustech.focus3d.paint.model.model;
-import  java.util.Date;
-import  com.focustech.model.common.BaseEntity;
-import  javax.persistence.Entity;
-import  javax.persistence.Table;
-import  javax.persistence.Id;
-import  javax.persistence.GeneratedValue;
-import  javax.persistence.GenerationType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.focustech.model.common.BaseEntity;
 /**
  *
  * *
@@ -25,6 +25,7 @@ public class PaintModel extends BaseEntity {
 	private String name;//名称
 	private Long picFileSn;//模型图片
 	private Long modelFileSn;//模型文件
+	private Integer versionNum;
 	private Integer useCount;//使用次数
 	private Long downloadCount;//下载次数
 	private Integer modelType;//模型数据类型 1-3D全景 2-3D模型
@@ -76,5 +77,11 @@ public class PaintModel extends BaseEntity {
 	}
 	public void setHouseType(Integer houseType){
 	    this.houseType = houseType;
+	}
+	public Integer getVersionNum() {
+		return versionNum;
+	}
+	public void setVersionNum(Integer versionNum) {
+		this.versionNum = versionNum;
 	}
 }

@@ -26,6 +26,7 @@ public class PaintProduct extends BaseEntity {
 	private String colorName;//颜色名称
 	private Long picFileSn;//模型图片
 	private Long modelFileSn;//模型文件
+	private Integer versionNum;
 	private String productId;//产品ID
 	private Long cateSn;//产品系列编号
 	private String size;//规格
@@ -91,5 +92,10 @@ public class PaintProduct extends BaseEntity {
 	public void setColorSn(Long colorSn) {
 		this.colorSn = colorSn;
 	}
-	
+	public Integer getVersionNum() {
+		return versionNum;
+	}
+	public void setVersionNum(Integer versionNum) {
+		this.versionNum = versionNum;
+	}
 }

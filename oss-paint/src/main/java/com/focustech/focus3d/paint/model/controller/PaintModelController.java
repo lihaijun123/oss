@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.focustech.common.utils.TCUtil;
 import com.focustech.extend.spring.argresolver.RedirectAttributes;
 import com.focustech.focus3d.paint.model.model.PaintModel;
 import com.focustech.focus3d.paint.model.service.PaintModelService;
@@ -44,6 +45,7 @@ public class PaintModelController extends AbstractController{
         if (result.hasErrors()) {
         	return "/focus3d/paintModel/new";
         }
+        paintModel.setVersionNum(1);
         paintModelService.insertOrUpdate(paintModel);
     	redirectAttributes.addFlashAttribute("保存成功");
     	return redirectTo("/paintModel.do?method=edit&sn=" + paintModel.getSn());
@@ -73,7 +75,14 @@ public class PaintModelController extends AbstractController{
         if (result.hasErrors()) {
         	return "/focus3d/paintModel/edit";
         }
-        paintModelService.insertOrUpdate(paintModel);
+        PaintModel dbObj = paintModelService.select(paintModel.getSn());
+        paintModel.setVersionNum(dbObj.getVersionNum());
+		if(dbObj.getModelFileSn() != null && !dbObj.getModelFileSn().equals(paintModel.getModelFileSn())){
+			Integer version = TCUtil.iv(paintModel.getVersionNum());
+			paintModel.setVersionNum(++ version);
+		}
+		
+        paintModelService.update(paintModel);
         redirectAttributes.addFlashAttribute("保存成功");
     	return redirectTo("/paintModel.do?method=edit&sn=" + paintModel.getSn());
 	}
